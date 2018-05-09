@@ -1,17 +1,17 @@
 package jogoblackjack.model;
-import jogoblackjack.util.ListaEncadeada;
+import jogoblackjack.util.LinkedList;
 
 
 public class Partida { //NÃO ESQUECER DOS GETTERS E SETTERS!!!
     private int qtdJogadores;
-    private ListaEncadeada jogadores;
+    private LinkedList jogadores;
     
     public Partida(int qtdJogadores){
         this.qtdJogadores = qtdJogadores;
-        jogadores = new ListaEncadeada();
+        jogadores = new LinkedList();
     }  
     
-    public void selecionarJogadores(int qtdJogadores, ListaEncadeada jogadores){
+    public void selecionarJogadores(int qtdJogadores, LinkedList jogadores){
         
     }
     
