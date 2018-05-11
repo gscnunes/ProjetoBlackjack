@@ -6,16 +6,10 @@ public interface Ilist{
     
     public void addLast(Object data);
     
-    public Object removeFirst(Object data);
+    public Object removeFirst();
     
-    public Object removeLast(Object data);    
-    
-    public void set(int index, Object data);
-    
-    public Object get(int index);
-    
-    public boolean contains(Object obj); 
-    
+    public Object removeLast();    
+ 
     public int size();
     
     public boolean isEmpty();

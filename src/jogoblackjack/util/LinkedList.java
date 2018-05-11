@@ -2,57 +2,134 @@ package jogoblackjack.util;
 
 public class LinkedList implements Ilist {
 
+    private Node head;
+    private int totalDeElementos;
+
+    
+    
+    
+    private class Node {
+
+        private Object data;
+        private Node next;
+
+        public Node(Object data) {
+            this.data = data;
+        }
+
+        public Node getNext() {
+            return next;
+        }
+
+        public void setNext(Node next) {
+            this.next = next;
+        }
+
+        public Object getData() {
+            return data;
+        }
+
+        public void setO(Object data) {
+            this.data = data;
+        }
+    }
+    
+    
+    
+    
+    
+    public class MyIterator implements Iterator {
+
+    private Node temp;
+
+    public MyIterator(Node head) {
+        this.temp = head;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return temp != null;
+    }
+
+    @Override
+    public Object next() {
+        Object aux = temp.getData();
+        temp = temp.getNext();
+        return aux;
+    }
+
+}
+    
+    
+    
+    
+
     @Override
     public void addFirst(Object data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Node nova = head;
+        head = new Node(data);
+        head.setNext(nova);
+        this.totalDeElementos++;
     }
 
     @Override
     public void addLast(Object data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmpty()) {
+            addFirst(data);
+        } else {
+            Node n = getNode(size() - 1);
+            n.setNext(new Node(data));
+            totalDeElementos++;
+        }
     }
 
     @Override
-    public Object removeFirst(Object data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object removeFirst() {
+        Object p = this.head.getData();
+        this.head = this.head.getNext();
+        this.totalDeElementos--;
+
+        return p;
     }
 
     @Override
-    public Object removeLast(Object data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void set(int index, Object data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object get(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean contains(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object removeLast() {
+        Node n = this.head;
+        Node ant = this.head;
+        while (n.getNext() != null) {
+            ant = n;
+            n = n.getNext();
+        }
+        Object p = n.getData();
+        ant.setNext(null);
+        this.totalDeElementos--;
+        return p;
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.totalDeElementos;
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.totalDeElementos == 0;
     }
 
     @Override
     public Iterator iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new MyIterator(head);
     }
 
-    
-        
-    
+    //Método para retornar um determinado Node a partir de uma posição 
+    private Node getNode(int index) {
+        if (index >= 0 && index < size()) {
+            Node n = this.head;
+            for (int i = 0; i < index; i++) {
+                n = n.getNext();
+            }
+            return n;
+        }
+        return null;
+    }
 }
