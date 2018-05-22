@@ -10,6 +10,7 @@ public class Croupier extends Jogador {
 
     public Croupier(String user, String senha) {
         super(user, senha);
+        baralho = new Baralho();
         listadecartas = new LinkedList();
     }
 
@@ -18,4 +19,5 @@ public class Croupier extends Jogador {
         this.listadecartas.addLast(croupier.pegaCarta());
         return maodecarta.CartasNaMao(listadecartas);
     }
+
 }

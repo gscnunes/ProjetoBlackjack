@@ -17,7 +17,7 @@ public class Baralho {
     }
     //transformar os valores em Strings
 
-    void addCartas() {
+    public void addCartas() {
         cartas[0] = new Carta("paus", "2", 1);
         cartas[1] = new Carta("paus", "3", 2);
         cartas[2] = new Carta("paus", "4", 3);
@@ -75,10 +75,10 @@ public class Baralho {
         cartas[51] = new Carta("ouros", "AS", 52);
     }
 
-    void embaralharEAddPilha() {
+    public void embaralharEAddPilha() {
         Random random = new Random();
 
-        for (int i = 0; i < cartas.length; i++) { //tirei o - 1
+        for (int i = 0; i < cartas.length; i++) {
             int j = random.nextInt(cartas.length);
             
             Object temp = cartas[i];
@@ -90,6 +90,4 @@ public class Baralho {
             pcartas.push(carta);
         }
     }
-
-  
 }
