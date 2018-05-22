@@ -12,7 +12,7 @@ public class Croupier extends Jogador {
         super(user, senha);
         listadecartas = new LinkedList();
     }
-     
+
     @Override
     public int pegarCarta(Croupier croupier) {
         this.listadecartas.addLast(croupier.pegaCarta());
