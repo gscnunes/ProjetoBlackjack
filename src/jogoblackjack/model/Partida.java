@@ -44,16 +44,53 @@ public class Partida {
     }
 
     void pegarCarta() {
-        int resposta;
+        int resposta, pontos = 0;
+        Carta carta;
         Iterator iterador = jogadoresDaPartida.iterator();
         while (!iterador.hasNext()) {
             Jogador jogador = (Jogador) iterador.next();
+            
+            System.out.println("Cartas do jogador " + jogador.getUser());
+            
+            carta = (Carta) jogador.pegarCarta(croupier);
+            pontos = pontos + Integer.parseInt(carta.getNumero());
+            
+            System.out.print(" " +carta.getNumero());
+            System.out.print(" " +carta.getNaipe());
+            
+            carta = (Carta) jogador.pegarCarta(croupier);
+            pontos = pontos + Integer.parseInt(carta.getNumero());
+            
+            System.out.print(" " +carta.getNumero());
+            System.out.print(" " +carta.getNaipe());
+            
             System.out.print("Jogador " + jogador.getUser());
             System.out.println("deseja pegar carta? [1] - SIM [2] - NÃO");
             resposta = Integer.parseInt(scan.nextLine());
-
+            
             if (resposta == 1) {
-                jogador.pegarCarta(croupier);
+                carta = (Carta) jogador.pegarCarta(croupier);
+                pontos = pontos + Integer.parseInt(carta.getNumero());
+                
+                if(pontos == 21){
+                    System.out.print("Jogador " + jogador.getUser());
+                    System.out.println("venceu com " + pontos);
+                }else if(pontos > 21){
+                    System.out.print("Jogador " + jogador.getUser());
+                    System.out.println("estorou com " + pontos);
+                }
+            }
+            if(resposta == 2){
+                if(pontos == 21){
+                    System.out.print("Jogador " + jogador.getUser());
+                    System.out.println("venceu com " + pontos);
+                }else if(pontos > 21){
+                    System.out.print("Jogador " + jogador.getUser());
+                    System.out.println("estorou com " + pontos);
+                }else{
+                    System.out.print("Jogador " + jogador.getUser());
+                    System.out.println("ficou com " + pontos);
+                }
             }
         }
 

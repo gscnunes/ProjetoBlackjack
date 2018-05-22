@@ -50,8 +50,10 @@ public class Jogador {
         this.jogosvencidos = jogosvencidos;
     }
 
-    public int pegarCarta(Croupier croupier) {
+    public Ilist pegarCarta(Croupier croupier) {
         this.listadecartas.addLast(croupier.pegaCarta());
+        this.listadecartas.addLast(croupier.pegaCarta());
+
         return maodecarta.CartasNaMao(listadecartas);
     }
 }

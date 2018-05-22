@@ -15,7 +15,6 @@ public class Baralho {
         addCartas();
         embaralharEAddPilha();
     }
-    //transformar os valores em Strings
 
     public void addCartas() {
         cartas[0] = new Carta("paus", "2", 1);

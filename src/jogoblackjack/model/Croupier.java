@@ -15,7 +15,7 @@ public class Croupier extends Jogador {
     }
 
     @Override
-    public int pegarCarta(Croupier croupier) {
+    public Ilist pegarCarta(Croupier croupier) {
         this.listadecartas.addLast(croupier.pegaCarta());
         return maodecarta.CartasNaMao(listadecartas);
     }
