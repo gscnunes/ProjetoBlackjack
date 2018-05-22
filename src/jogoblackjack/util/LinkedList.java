@@ -5,9 +5,6 @@ public class LinkedList implements Ilist {
     private Node head;
     private int totalDeElementos;
 
-    
-    
-    
     private class Node {
 
         private Object data;

@@ -18,23 +18,14 @@ public class MaoDeCarta {
     //retorna o total de pontos na mão
     public int CartasNaMao(Ilist maodecarta) {
 
-        Carta temp; //(Carta) maodecarta.iterator().next();
+        Carta temp;
 
-        //String c = temp.getNumero();
         Iterator cursor = maodecarta.iterator();
         int aux;
 
         while (cursor.hasNext()) {
             temp = (Carta) cursor.next();
 
-//
-//            if (temp.getNumero().equals("K") || temp.getNumero().equals("Q") || temp.getNumero().equals("J")) {
-//                pontos += 10;
-//            } else if  {
-//            } else {
-//                pontos += Integer.parseInt(temp.getNumero());
-//
-//            }
             switch (temp.getNumero()) {
                 case "K":
                     aux = 10;
@@ -71,6 +62,5 @@ public class MaoDeCarta {
             }
         }
         return 1;
-
     }
 }
