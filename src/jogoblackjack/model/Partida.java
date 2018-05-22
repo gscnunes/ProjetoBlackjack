@@ -44,7 +44,8 @@ public class Partida {
             }
         }
     }
-
+ 
+//melhorar isso
     void pegarCarta() {
         int resposta, pontos = 0;
         Carta carta, pegarCarta;
