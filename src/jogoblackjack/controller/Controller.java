@@ -22,10 +22,6 @@ public class Controller {
 
     }
 
-    //cadastrar jogadores
-    //escolher jogadores para partida
-    //adicionar as cartas à mão de carta
-    //iniciar novo baralho???  
     public void addJogador(Jogador jogador) {
         this.jogadores.addLast(jogador);
     }

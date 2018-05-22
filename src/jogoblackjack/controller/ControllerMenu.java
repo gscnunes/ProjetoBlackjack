@@ -1,5 +1,6 @@
 package jogoblackjack.controller;
 
+import java.io.Console;
 import java.util.Scanner;
 import jogoblackjack.model.Baralho;
 import jogoblackjack.model.Jogador;
@@ -9,6 +10,7 @@ import jogoblackjack.util.Pilha;
 public class ControllerMenu {
 
     Scanner scan = new Scanner(System.in);
+    Console console;
     Controller controller;
     Jogador jogador;
    
@@ -18,7 +20,7 @@ public class ControllerMenu {
         int sair = 1;
 
         do {
-            System.out.println("[1] - Cadastrar jogadores [2] - Iniciar Partida [0] - Sair");
+            System.out.println("[1] - Cadastrar jogadores\n[2] - Iniciar Partida\n[0] - Sair");
             opcao = Integer.parseInt(scan.nextLine());
             switch (opcao) {
 
@@ -28,7 +30,7 @@ public class ControllerMenu {
                 case 2:
                     iniciarPartida();
                     break;
-                case 3:
+                case 0:
                     sair = 0;
                     break;
                 default:

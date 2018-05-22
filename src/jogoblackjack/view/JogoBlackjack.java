@@ -6,6 +6,8 @@ import jogoblackjack.controller.ControllerMenu;
 public class JogoBlackjack {
     
     public static void main(String[] args) {
-        new ControllerMenu();
+        System.out.println("\t\tJOGO BLACKJACK");
+       ControllerMenu controller = new ControllerMenu();
+       controller.Menu();
     }       
 }
