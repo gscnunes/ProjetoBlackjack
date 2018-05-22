@@ -16,7 +16,7 @@ public class Baralho {
         embaralharEAddPilha();
     }
 
-    public void addCartas() {
+    public Object[] addCartas() {
         cartas[0] = new Carta("paus", "2", 1);
         cartas[1] = new Carta("paus", "3", 2);
         cartas[2] = new Carta("paus", "4", 3);
@@ -72,9 +72,11 @@ public class Baralho {
         cartas[49] = new Carta("ouros", "J", 50);
         cartas[50] = new Carta("ouros", "Q", 51);
         cartas[51] = new Carta("ouros", "AS", 52);
+        
+        return cartas;
     }
 
-    public void embaralharEAddPilha() {
+    public IStack embaralharEAddPilha(Object[] cartas) {
         Random random = new Random();
 
         for (int i = 0; i < cartas.length; i++) {
@@ -88,5 +90,6 @@ public class Baralho {
         for (Object carta : cartas) {
             pcartas.push(carta);
         }
+        return pcartas;
     }
 }

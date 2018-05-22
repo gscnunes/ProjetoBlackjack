@@ -1,18 +1,25 @@
 package jogoblackjack.controller;
 
 import java.util.Scanner;
+import jogoblackjack.model.Baralho;
 import jogoblackjack.model.Jogador;
 import jogoblackjack.model.Partida;
+import jogoblackjack.util.IStack;
 import jogoblackjack.util.Ilist;
 import jogoblackjack.util.LinkedList;
+import jogoblackjack.util.Pilha;
 
 public class Controller {
 
     Scanner scan = new Scanner(System.in);
     private Ilist jogadores;
+    Baralho baralho;
+    IStack cartas;
 
     public Controller() {
         this.jogadores = new LinkedList();
+        this.cartas = new Pilha();
+
     }
 
     //cadastrar jogadores
@@ -33,5 +40,13 @@ public class Controller {
 
         }
         Partida partida = new Partida(numDeJogadores, jogadores);
+    }
+
+    public void criarBaralho() {
+        cartas = baralho.embaralharEAddPilha(baralho.addCartas());
+    }
+
+    public Object darCartas() {
+        return cartas.pop();    
     }
 }

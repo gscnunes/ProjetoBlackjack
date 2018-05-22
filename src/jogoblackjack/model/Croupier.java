@@ -10,14 +10,18 @@ public class Croupier extends Jogador {
 
     public Croupier(String user, String senha) {
         super(user, senha);
-        baralho = new Baralho();
         listadecartas = new LinkedList();
     }
 
     @Override
-    public Ilist pegarCarta(Croupier croupier) {
-        this.listadecartas.addLast(croupier.pegaCarta());
+    public int pegarCarta(Carta carta) {
+        this.listadecartas.addLast(carta);
         return maodecarta.CartasNaMao(listadecartas);
     }
+    
+    @Override
+     public Ilist cartasNaMao(){
+        return this.listadecartas;
+    }//alterar para só aparecer uma carta
 
 }

@@ -16,7 +16,7 @@ public class MaoDeCarta {
     }
 
     //retorna o total de pontos na mão
-    public Object CartasNaMao(Ilist maodecarta) {
+    public int CartasNaMao(Ilist maodecarta) {
 
         Carta temp;
 

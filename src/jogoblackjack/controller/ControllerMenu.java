@@ -1,13 +1,17 @@
 package jogoblackjack.controller;
 
 import java.util.Scanner;
+import jogoblackjack.model.Baralho;
 import jogoblackjack.model.Jogador;
+import jogoblackjack.util.IStack;
+import jogoblackjack.util.Pilha;
 
 public class ControllerMenu {
 
     Scanner scan = new Scanner(System.in);
     Controller controller;
     Jogador jogador;
+   
 
     public void Menu() {
         int opcao;
@@ -34,7 +38,7 @@ public class ControllerMenu {
         } while (sair == 1);
     }
 
-    private void cadastrarPessoa() {
+    public void cadastrarPessoa() {
         System.out.println("Digite o user do Jogador:");
         jogador.setUser(scan.nextLine());
         System.out.println("Digite a senha do Jogador:");
@@ -43,6 +47,8 @@ public class ControllerMenu {
         controller.addJogador(jogador);
     }
 
-    private void iniciarPartida() {
+    public void iniciarPartida(){
+        
     }
+
 }
