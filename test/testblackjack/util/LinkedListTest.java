@@ -19,9 +19,9 @@ public class LinkedListTest {
     @Before
     public void setUp() throws Exception {
         lista = new LinkedList();
-        jogador1 = new Jogador("CCarlos", "1234", 15, 2);
-        jogador2 = new Jogador("BBruno", "1234", 19, 5);
-        jogador3 = new Jogador("LLucas", "1234", 56, 7);
+        jogador1 = new Jogador("CCarlos", "1234");
+        jogador2 = new Jogador("BBruno", "1234");
+        jogador3 = new Jogador("LLucas", "1234");
     }
 
     @Test

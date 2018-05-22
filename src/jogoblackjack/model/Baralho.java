@@ -12,10 +12,11 @@ public class Baralho {
     public Baralho() {
         this.cartas = new Object[52];
         pcartas = new Pilha();
+        addCartas();
+        embaralharEAddPilha();
     }
-    //transformar os valores em Strings
 
-    void addCartas() {
+    public Object[] addCartas() {
         cartas[0] = new Carta("paus", "2", 1);
         cartas[1] = new Carta("paus", "3", 2);
         cartas[2] = new Carta("paus", "4", 3);
@@ -71,14 +72,15 @@ public class Baralho {
         cartas[49] = new Carta("ouros", "J", 50);
         cartas[50] = new Carta("ouros", "Q", 51);
         cartas[51] = new Carta("ouros", "AS", 52);
+        
+        return cartas;
     }
 
-    void embaralharEAddPilha() {
+    public IStack embaralharEAddPilha(Object[] cartas) {
         Random random = new Random();
 
-        for (int i = 0; i < cartas.length; i++) { //tirei o - 1
+        for (int i = 0; i < cartas.length; i++) {
             int j = random.nextInt(cartas.length);
-
             
             Object temp = cartas[i];
             cartas[i] = cartas[j];
@@ -88,7 +90,6 @@ public class Baralho {
         for (Object carta : cartas) {
             pcartas.push(carta);
         }
+        return pcartas;
     }
-
-  
 }
