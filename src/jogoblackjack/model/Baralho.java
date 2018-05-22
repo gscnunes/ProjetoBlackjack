@@ -12,6 +12,8 @@ public class Baralho {
     public Baralho() {
         this.cartas = new Object[52];
         pcartas = new Pilha();
+        addCartas();
+        embaralharEAddPilha();
     }
     //transformar os valores em Strings
 
@@ -78,7 +80,6 @@ public class Baralho {
 
         for (int i = 0; i < cartas.length; i++) { //tirei o - 1
             int j = random.nextInt(cartas.length);
-
             
             Object temp = cartas[i];
             cartas[i] = cartas[j];

@@ -1,25 +1,21 @@
 package jogoblackjack.model;
 
-import jogoblackjack.util.IStack;
-import jogoblackjack.util.Pilha;
+import jogoblackjack.util.Ilist;
+import jogoblackjack.util.LinkedList;
 
 public class Croupier extends Jogador {
 
-    IStack pcartas;
+    Ilist listadecartas;
     MaoDeCarta maodecarta;
 
     public Croupier(String user, String senha) {
         super(user, senha);
-        pcartas = new Pilha();
+        listadecartas = new LinkedList();
     }
-
-    void regra17() {
-        if (maodecarta.CartasNaMao() >= 17) {
-            //parar de pegar cartas
-        }
-    }
-    
-      Object pegaCarta() {
-        return pcartas.pop();
+     
+    @Override
+    public int pegarCarta(Croupier croupier) {
+        this.listadecartas.addLast(croupier.pegaCarta());
+        return maodecarta.CartasNaMao(listadecartas);
     }
 }

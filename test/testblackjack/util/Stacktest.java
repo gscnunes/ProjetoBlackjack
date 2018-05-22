@@ -19,9 +19,9 @@ public class Stacktest {
     public void setUp() throws Exception {
         pilha = new Pilha();
 
-        carta1 = new Carta("espadas", 2, 27);
-        carta2 = new Carta("copas", 8, 20);
-        carta3 = new Carta("ouros", 12, 50);
+        carta1 = new Carta("espadas", "2", 27);
+        carta2 = new Carta("copas", "8", 20);
+        carta3 = new Carta("ouros", "12", 50);
     }
 
     @Test
