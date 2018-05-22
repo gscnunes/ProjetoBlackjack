@@ -15,6 +15,7 @@ public class Controller {
     private Ilist jogadores;
     Baralho baralho;
     IStack cartas;
+    Partida partida;
 
     public Controller() {
         this.jogadores = new LinkedList();
@@ -35,7 +36,8 @@ public class Controller {
             numDeJogadores = Integer.parseInt(scan.nextLine());
 
         }
-        Partida partida = new Partida(numDeJogadores, jogadores);
+       partida.addJogadorNaPartida(numDeJogadores, jogadores);
+       partida.pegarCarta();
     }
 
     public void criarBaralho() {
@@ -43,6 +45,6 @@ public class Controller {
     }
 
     public Object darCartas() {
-        return cartas.pop();    
+        return cartas.pop();
     }
 }

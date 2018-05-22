@@ -10,15 +10,13 @@ public class Partida {
 
     Scanner scan = new Scanner(System.in);
     private int numDeJogadores;
-    Ilist jogadores;
     Ilist jogadoresDaPartida;
     Baralho baralho;
     String jogador;
     Controller controller;
 
-    public Partida(int numDeJogadores, Ilist jogadores) {
+    public Partida(int numDeJogadores) {
         this.numDeJogadores = numDeJogadores;
-        this.jogadores = jogadores;
         baralho = new Baralho();
         this.jogadoresDaPartida = new LinkedList();
     }
@@ -31,7 +29,11 @@ public class Partida {
         this.numDeJogadores = numDeJogadores;
     }
 
-    void addJogadorNaPartida(int numDeJogadores) {
+    public void addJogadorNaPartida(int numDeJogadores, Ilist jogadores) {
+        if (jogadores.size() == 0) {
+            System.out.println("Casdatre um jogador");
+            return;
+        }
         for (int i = 0; i < numDeJogadores; i++) {
             System.out.println("Digite o user do Jogador:");
             jogador = scan.nextLine();
@@ -44,9 +46,10 @@ public class Partida {
             }
         }
     }
- 
-//melhorar isso
-    void pegarCarta() {
+
+    //melhorar isso
+    //falta cartas do couprier
+    public void pegarCarta() {
         int resposta, pontos = 0;
         Carta carta, pegarCarta;
         Iterator iterador = jogadoresDaPartida.iterator();
@@ -56,11 +59,10 @@ public class Partida {
             System.out.println("Cartas do jogador " + jogado.getUser());
 
             pegarCarta = (Carta) controller.darCartas();
-                    
-            carta = (Carta) jogado.pegarCarta(pegarCarta);
-            pontos = 
 
-            System.out.print(" " + carta.getNumero());
+            carta = (Carta) jogado.pegarCarta(pegarCarta);
+            pontos
+                    = System.out.print(" " + carta.getNumero());
             System.out.println(" " + carta.getNaipe());
 
             pegarCarta = (Carta) controller.darCartas();
@@ -70,9 +72,8 @@ public class Partida {
 
             System.out.print(" " + carta.getNumero());
             System.out.println(" " + carta.getNaipe());
-            
-            //cartas do croupier
 
+            //cartas do croupier
             System.out.print("Jogador " + jogado.getUser());
             System.out.println("deseja pegar carta? [1] - SIM [2] - NÃO");
             resposta = Integer.parseInt(scan.nextLine());

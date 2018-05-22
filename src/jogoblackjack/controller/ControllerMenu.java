@@ -40,17 +40,19 @@ public class ControllerMenu {
         } while (sair == 1);
     }
 
+    //problema aqui
     public void cadastrarPessoa() {
         System.out.println("Digite o user do Jogador:");
         jogador.setUser(scan.nextLine());
+        System.out.println("aqui vai");        
         System.out.println("Digite a senha do Jogador:");
         jogador.setSenha(scan.nextLine());
-
+        
         controller.addJogador(jogador);
     }
 
     public void iniciarPartida(){
-        
+        controller.iniciarPartida();
     }
 
 }
