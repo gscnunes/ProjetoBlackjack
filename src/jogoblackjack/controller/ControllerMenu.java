@@ -42,10 +42,13 @@ public class ControllerMenu {
 
     //cadastrar todos os jogadores
     public void cadastrarPessoa() {
-        System.out.println("Digite o user do Jogador:");
-        jogador.setUser(scan.nextLine()); //problema aqui
-        System.out.println("Digite a senha do Jogador:");
-        jogador.setSenha(scan.nextLine());
+        System.out.println("Digite o user do Jogador:");        
+        String user = scan.nextLine(); //criei um auxiliar pra guardar o dado inserido
+        
+        System.out.println("Digite a senha do Jogador:");        
+        String senha = scan.nextLine();
+        
+        Jogador jogador = new Jogador(user, senha);//mando os auxiliares como parâmetro para a criação do novo jogador
         
         controller.addJogador(jogador);//metodo para adicionar os jogadores na lista
     }
