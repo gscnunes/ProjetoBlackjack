@@ -5,8 +5,8 @@ import jogoblackjack.util.LinkedList;
 
 public class Croupier extends Jogador {
 
-    Ilist listadecartas;
-    MaoDeCarta maodecarta;
+    private Ilist listadecartas;
+    private MaoDeCarta maodecarta;
 
     public Croupier(String user, String senha) {
         super(user, senha);
@@ -31,4 +31,10 @@ public class Croupier extends Jogador {
     public Ilist cartas(){
         return this.listadecartas;
     } 
+
+    public Ilist getListadecartas() {
+        return listadecartas;
+    }
+    
+    
 }

@@ -36,4 +36,11 @@ public class Carta {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return numero + " " + naipe + " " + id;
+    }
+    
+    
+
 }

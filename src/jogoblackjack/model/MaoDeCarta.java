@@ -6,10 +6,10 @@ import jogoblackjack.util.LinkedList;
 
 public class MaoDeCarta {
 
-    Baralho baralho;
-    Croupier croupier;
-    int pontos;
-    Ilist lista;
+    private Baralho baralho;
+    private Croupier croupier;
+    private int pontos;
+    private Ilist lista;
 
     public MaoDeCarta() {
         lista = new LinkedList();

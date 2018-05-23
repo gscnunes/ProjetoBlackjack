@@ -6,11 +6,12 @@ import jogoblackjack.util.Pilha;
 
 public class Baralho {
 
-    Object[] cartas;
-    IStack pcartas;
+    private Carta[] cartas;
+    private Pilha pcartas;
 
     public Baralho() {
-        this.cartas = new Object[52];
+        this.cartas = new Carta[52];
+        addCartas();
         pcartas = new Pilha();
     }
 
@@ -70,22 +71,28 @@ public class Baralho {
         cartas[49] = new Carta("ouros", "J", 50);
         cartas[50] = new Carta("ouros", "Q", 51);
         cartas[51] = new Carta("ouros", "AS", 52);
+        
+        
+        System.out.println("CARTAS ORDENADAS\n");
+        for (Carta carta : cartas) {
+            System.out.printf("%s %s %d\n", carta.getNumero(), carta.getNaipe(), carta.getIdentificador());
+        }
 
         return cartas;
     }
 
-    public IStack embaralharEAddPilha(Object[] cartas) {
+    public Pilha embaralharEAddPilha() {
         Random random = new Random();
 
         for (int i = 0; i < cartas.length; i++) {
-            int j = random.nextInt(cartas.length);
-
-            Object temp = cartas[i];
+            
+            int j = random.nextInt(cartas.length); 
+            Carta temp = cartas[i];
             cartas[i] = cartas[j];
             cartas[j] = temp;
         }
-
-        for (Object carta : cartas) {
+        
+        for (Object carta : cartas){
             pcartas.push(carta);
         }
         return pcartas;

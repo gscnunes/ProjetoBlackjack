@@ -9,35 +9,14 @@ import jogoblackjack.util.Pilha;
 
 public class ControllerMenu {
 
-    Scanner scan = new Scanner(System.in);
-    Console console;
-    Controller controller;
-    Jogador jogador;
+    private Scanner scan = new Scanner(System.in);
+    private Console console;
+    private Controller controller = new Controller();
+    private Jogador jogador;
    
     //Opções do menu que o usuario digita o que ele deseja fazer
     public void Menu() {
-        int opcao;
-        int sair = 1;
-
-        do {
-            System.out.println("[1] - Cadastrar jogadores\n[2] - Iniciar Partida\n[0] - Sair");
-            opcao = Integer.parseInt(scan.nextLine());
-            switch (opcao) {
-
-                case 1:
-                    cadastrarPessoa();
-                    break;
-                case 2:
-                    iniciarPartida();
-                    break;
-                case 0:
-                    sair = 0;
-                    break;
-                default:
-                    System.out.println("Opção invalida");
-            }
-
-        } while (sair == 1);
+        
     }
 
     //cadastrar todos os jogadores
@@ -50,6 +29,7 @@ public class ControllerMenu {
         
         Jogador jogador = new Jogador(user, senha);//mando os auxiliares como parâmetro para a criação do novo jogador
         
+        //controller = new Controller(); //CORREÇÃO AQUI
         controller.addJogador(jogador);//metodo para adicionar os jogadores na lista
     }
 

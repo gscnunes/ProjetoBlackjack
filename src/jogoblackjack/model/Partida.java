@@ -2,23 +2,25 @@ package jogoblackjack.model;
 
 import java.util.Scanner;
 import jogoblackjack.controller.Controller;
-import jogoblackjack.util.Ilist;
-import jogoblackjack.util.Iterator;
-import jogoblackjack.util.LinkedList;
+
+import jogoblackjack.util.*;
 
 public class Partida {
 
-    Scanner scan = new Scanner(System.in);
+    private Scanner scan = new Scanner(System.in);
     private int numDeJogadores;
-    Ilist jogadoresDaPartida;
-    Baralho baralho;
-    Croupier croupier;
-    String jogador;
-    Controller controller;
+    private Ilist jogadoresDaPartida;
+    private Baralho baralho;
+    private Pilha monteCartas;
+    private Croupier croupier;
+    private String jogador;
+    private Controller controller;
 
     public Partida(int numDeJogadores) {
         this.numDeJogadores = numDeJogadores;
+        monteCartas = new Pilha();
         baralho = new Baralho();
+        monteCartas = baralho.embaralharEAddPilha();
         this.jogadoresDaPartida = new LinkedList();
     }
 
@@ -32,7 +34,7 @@ public class Partida {
 
     //adiciona um jogador na partida
     //pode colocar para verificar com senha
-    public void addJogadorNaPartida(int numDeJogadores, Ilist jogadores) {
+    public void addJogadorNaPartida(Ilist jogadores) {
         if (jogadores.size() == 0) { //caso não exista nenhum jogador registrado
             System.out.println("Cadatre um jogador");
             return;
@@ -60,7 +62,9 @@ public class Partida {
         Jogador user;
         Carta carta, pegaCarta;
         Iterator iterador;
-        iterador = jogadoresDaPartida.iterator();
+        iterador = jogadoresDaPartida.iterator();   
+        
+        //MÉTODO P/ INÍCIO DA PARTIDA
 
         while (!iterador.hasNext()) { //percorrendo a lista dos jogadores da partida 
             user = (Jogador) iterador.next(); //salvando o jogador atual
@@ -110,7 +114,7 @@ public class Partida {
             croupier.pegarCarta(pegaCarta);
         }
 
-        Iterator iteratorcroupier = croupier.listadecartas.iterator();
+        Iterator iteratorcroupier = croupier.getListadecartas().iterator();
         System.out.println("Cartas do croupier");
 
         while (!iteratorcroupier.hasNext()) { //imprime todas as cartas do croupier
@@ -155,6 +159,10 @@ public class Partida {
                 }
             }
         }
+    }
+    
+    public Carta darCarta(){
+        return (Carta)monteCartas.pop();
     }
 
 }

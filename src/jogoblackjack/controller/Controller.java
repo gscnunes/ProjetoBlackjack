@@ -11,7 +11,7 @@ import jogoblackjack.util.Pilha;
 
 public class Controller {
 
-    private Scanner scan = new Scanner(System.in);
+    private Scanner scan;
     private Ilist jogadores;
     private Baralho baralho;
     private IStack cartas;
@@ -20,7 +20,8 @@ public class Controller {
     public Controller() {
         this.jogadores = new LinkedList();
         this.cartas = new Pilha();
-
+        scan = new Scanner (System.in); //MUDEI AQUI
+        
     }
 
     //adiciona jogador na lista encadeada
@@ -30,24 +31,39 @@ public class Controller {
 
     //inicia uma partida fazendo o usuario escolher a quantidade de jogadores
     public void iniciarPartida() {
-        int numDeJogadores;
-        System.out.println("Digite a quantidade de jogadores:");
-        numDeJogadores = Integer.parseInt(scan.nextLine());
-        while (numDeJogadores > 5) {
-            System.out.println("Número de jogadores acima do limite");
-            numDeJogadores = Integer.parseInt(scan.nextLine());
+        
+        
+        if(jogadores.isEmpty()){
+            System.out.println("Não há jogadores cadastrados!");
+            return;
         }
-       partida.addJogadorNaPartida(numDeJogadores, jogadores);//chama metodo para adicionar jogador na partida
-       partida.pegarCarta();
+        else{
+            int numDeJogadores;
+            System.out.println("Digite a quantidade de jogadores: ");
+            numDeJogadores = scan.nextInt();
+            while (numDeJogadores > 5) {
+                System.out.println("Número de jogadores acima do limite, digite novamente: ");
+                numDeJogadores = scan.nextInt();
+            }
+            partida = new Partida(numDeJogadores);//chama metodo para adicionar jogador na partida
+            partida.addJogadorNaPartida(jogadores);
+            partida.pegarCarta();            
+        }
     }
+        
+        
+       
+    
 
-    //cria um baralho, embaralha e coloca dentro de uma variavel
-    public void criarBaralho() {
-        cartas = baralho.embaralharEAddPilha(baralho.addCartas());
-    }
+//    //cria um baralho, embaralha e coloca dentro de uma variavel
+//    public void criarBaralho() {
+//        cartas = baralho.embaralharEAddPilha();
+//    }
 
     //metodo para distribuir as cartas
     public Object darCartas() {
-        return cartas.pop();
+        return partida.darCarta();
     }
+    
+    
 }
