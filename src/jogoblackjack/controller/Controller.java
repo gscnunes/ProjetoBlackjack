@@ -11,11 +11,11 @@ import jogoblackjack.util.Pilha;
 
 public class Controller {
 
-    Scanner scan = new Scanner(System.in);
+    private Scanner scan = new Scanner(System.in);
     private Ilist jogadores;
-    Baralho baralho;
-    IStack cartas;
-    Partida partida;
+    private Baralho baralho;
+    private IStack cartas;
+    private Partida partida;
 
     public Controller() {
         this.jogadores = new LinkedList();
