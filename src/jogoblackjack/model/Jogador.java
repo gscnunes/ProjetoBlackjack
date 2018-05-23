@@ -52,12 +52,19 @@ public class Jogador {
         this.jogosvencidos = jogosvencidos;
     }
 
-    public int pegarCarta(Carta carta) {
+    //retorna a carta que o jogador acabou de pegar
+    public Object pegarCarta(Carta carta) {
         this.listadecartas.addLast(carta);
+        return carta;
+    }
+    
+    //retorna os pontos do jogador
+    public int cartasNaMao(){
         return maodecarta.CartasNaMao(listadecartas);
     }
     
-    public Ilist cartasNaMao(){
+    //lista de todas as cartas do jogador
+    public Ilist cartas(){
         return this.listadecartas;
     }
 }

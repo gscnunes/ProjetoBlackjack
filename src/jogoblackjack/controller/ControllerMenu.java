@@ -14,7 +14,7 @@ public class ControllerMenu {
     Controller controller;
     Jogador jogador;
    
-
+    //Opções do menu que o usuario digita o que ele deseja fazer
     public void Menu() {
         int opcao;
         int sair = 1;
@@ -40,17 +40,19 @@ public class ControllerMenu {
         } while (sair == 1);
     }
 
+    //cadastrar todos os jogadores
     public void cadastrarPessoa() {
         System.out.println("Digite o user do Jogador:");
-        jogador.setUser(scan.nextLine());
+        jogador.setUser(scan.nextLine()); //problema aqui
         System.out.println("Digite a senha do Jogador:");
         jogador.setSenha(scan.nextLine());
-
-        controller.addJogador(jogador);
+        
+        controller.addJogador(jogador);//metodo para adicionar os jogadores na lista
     }
 
+    //começa uma partida
     public void iniciarPartida(){
-        
+        controller.iniciarPartida();
     }
 
 }

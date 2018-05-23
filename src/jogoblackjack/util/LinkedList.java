@@ -5,62 +5,6 @@ public class LinkedList implements Ilist {
     private Node head;
     private int totalDeElementos;
 
-    private class Node {
-
-        private Object data;
-        private Node next;
-
-        public Node(Object data) {
-            this.data = data;
-        }
-
-        public Node getNext() {
-            return next;
-        }
-
-        public void setNext(Node next) {
-            this.next = next;
-        }
-
-        public Object getData() {
-            return data;
-        }
-
-        public void setO(Object data) {
-            this.data = data;
-        }
-    }
-    
-    
-    
-    
-    
-    public class MyIterator implements Iterator {
-
-    private Node temp;
-
-    public MyIterator(Node head) {
-        this.temp = head;
-    }
-
-    @Override
-    public boolean hasNext() {
-        return temp != null;
-    }
-
-    @Override
-    public Object next() {
-        Object aux = temp.getData();
-        temp = temp.getNext();
-        return aux;
-    }
-
-}
-    
-    
-    
-    
-
     @Override
     public void addFirst(Object data) {
         Node nova = head;

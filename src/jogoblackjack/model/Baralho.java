@@ -12,8 +12,6 @@ public class Baralho {
     public Baralho() {
         this.cartas = new Object[52];
         pcartas = new Pilha();
-        addCartas();
-        embaralharEAddPilha();
     }
 
     public Object[] addCartas() {
@@ -72,7 +70,7 @@ public class Baralho {
         cartas[49] = new Carta("ouros", "J", 50);
         cartas[50] = new Carta("ouros", "Q", 51);
         cartas[51] = new Carta("ouros", "AS", 52);
-        
+
         return cartas;
     }
 
@@ -81,7 +79,7 @@ public class Baralho {
 
         for (int i = 0; i < cartas.length; i++) {
             int j = random.nextInt(cartas.length);
-            
+
             Object temp = cartas[i];
             cartas[i] = cartas[j];
             cartas[j] = temp;
