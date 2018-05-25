@@ -38,7 +38,7 @@ public class Carta {
 
     @Override
     public String toString() {
-        return numero + " " + naipe + " " + id;
+        return numero + " " + naipe;
     }
     
     

@@ -22,19 +22,13 @@ public class Croupier extends Jogador {
 
     //retorna os pontos do jogador
     @Override
-     public int cartasNaMao(){
+    public int cartasNaMao() {
         return maodecarta.CartasNaMao(listadecartas);
     }
-    
+
     //lista de todas as cartas do croupier
     @Override
-    public Ilist cartas(){
+    public Ilist cartas() {
         return this.listadecartas;
-    } 
-
-    public Ilist getListadecartas() {
-        return listadecartas;
     }
-    
-    
 }
