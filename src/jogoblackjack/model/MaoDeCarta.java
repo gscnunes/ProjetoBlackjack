@@ -44,9 +44,7 @@ public class MaoDeCarta {
                 default:
                     aux = Integer.parseInt(temp.getNumero());
             }
-
             pontos = pontos + aux;
-
         }
         return pontos;
     }
@@ -63,4 +61,10 @@ public class MaoDeCarta {
         }
         return 1;
     }
+
+    public Ilist getLista() {
+        return lista;
+    }
+    
+    
 }

@@ -6,8 +6,8 @@ import jogoblackjack.util.LinkedList;
 
 public class Jogador {
 
-    String user;
-    String senha;
+    private String user;
+    private String senha;
     private int ponttotal;
     private int jogosvencidos;
     private Ilist listadecartas;
@@ -18,6 +18,8 @@ public class Jogador {
         this.user = user;
         this.senha = senha;
         listadecartas = new LinkedList();
+        maodecarta = new MaoDeCarta();
+        listadecartas = maodecarta.getLista();
     }
 
     public String getUser() {
@@ -55,6 +57,7 @@ public class Jogador {
     //retorna a carta que o jogador acabou de pegar
     public Object pegarCarta(Carta carta) {
         this.listadecartas.addLast(carta);
+        
         return carta;
     }
 
@@ -64,7 +67,14 @@ public class Jogador {
     }
 
     //lista de todas as cartas do jogador
-    public Ilist cartas() {
-        return this.listadecartas;
+    public Ilist getCartas() { //como esse método faz a mesma coisa que um get faria, deixei assim porque tava meio confuso
+        return listadecartas;
     }
+
+    @Override
+    public String toString() { //criei esse aqui também pra facilitar
+        return user;
+    }
+    
+    
 }

@@ -73,12 +73,14 @@ public class Partida {
 
             System.out.print("Jogador " + user.getUser());
             System.out.println(" deseja pegar carta? [1] - SIM [2] - NÃO");//jogador quer mais cartas. pode colocar em um metodo
-            resposta = Integer.parseInt(scan.nextLine());
+            resposta = scan.nextInt();
 
             if (resposta == 1) {
                 user.pegarCarta(darCarta());
+                mostrarMao(user);
                 verificarGanhou(user);
-            }
+            }            
+            
 
         }
         cartasDoCroupier();
@@ -98,21 +100,17 @@ public class Partida {
 
             user.pegarCarta(darCarta());
             user.pegarCarta(darCarta());
-
-            Iterator iterator = user.cartas().iterator();
-            System.out.println("Cartas do jogador " + user.getUser());
-
-            while (iterator.hasNext()) {
-                carta = (Carta) iterator.next();
-                System.out.println(carta);
-            }
+            mostrarMao(user);
         }
         System.out.println("Cartas do Croupier");
         carta = (Carta) croupier.pegarCarta(darCarta());
 
+        System.out.println("");
         System.out.println(carta);
         croupier.pegarCarta(darCarta());
-        System.out.println("Carta desconhecida");//segunda carta do croupier fica para baixo
+        System.out.println("**Carta desconhecida**");//segunda carta do croupier fica para baixo
+        System.out.println("");
+        System.out.println("");
     }
 
     public void limiteCroupier() {
@@ -123,13 +121,16 @@ public class Partida {
     }
 
     public void cartasDoCroupier() {
-        iterador = croupier.cartas().iterator();
+        iterador = croupier.getCartas().iterator();
         System.out.println("Cartas do croupier");
 
+        System.out.println("");
         while (iterador.hasNext()) { //imprime todas as cartas do croupier
             carta = (Carta) iterador.next();
-            System.out.print(carta);
+            System.out.println(carta);
         }
+        System.out.println("");
+        System.out.println("");
     }
 
     public void verificarGanhou(Jogador user) {
@@ -154,6 +155,23 @@ public class Partida {
         }            
     
     
+    }
+    
+    public void mostrarMao(Jogador jogador){ //criei um método pra mostrar as cartas da mão
+        
+        Iterator cursor = jogador.getCartas().iterator();
+        
+        Carta carta;
+        
+        System.out.println("Cartas do user: " + jogador);
+        System.out.println("");
+        
+        while(cursor.hasNext()){
+            carta = (Carta)cursor.next();
+            System.out.println(carta);
+            System.out.println("");
+        }
+        System.out.println(""); 
     }
 
 }

@@ -28,7 +28,7 @@ public class Croupier extends Jogador {
 
     //lista de todas as cartas do croupier
     @Override
-    public Ilist cartas() {
-        return this.listadecartas;
+    public Ilist getCartas() {
+        return listadecartas;
     }
 }
