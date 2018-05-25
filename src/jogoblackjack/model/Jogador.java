@@ -6,8 +6,8 @@ import jogoblackjack.util.LinkedList;
 
 public class Jogador {
 
-    private String user;
-    private String senha;
+    String user;
+    String senha;
     private int ponttotal;
     private int jogosvencidos;
     private Ilist listadecartas;
@@ -57,14 +57,14 @@ public class Jogador {
         this.listadecartas.addLast(carta);
         return carta;
     }
-    
+
     //retorna os pontos do jogador
-    public int cartasNaMao(){
+    public int cartasNaMao() {
         return maodecarta.CartasNaMao(listadecartas);
     }
-    
+
     //lista de todas as cartas do jogador
-    public Ilist cartas(){
+    public Ilist cartas() {
         return this.listadecartas;
     }
 }

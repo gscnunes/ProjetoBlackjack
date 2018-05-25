@@ -10,9 +10,7 @@ import jogoblackjack.util.Pilha;
 public class ControllerMenu {
 
     private Scanner scan = new Scanner(System.in);
-    private Console console;
     private Controller controller = new Controller();
-    private Jogador jogador;
    
     //Opções do menu que o usuario digita o que ele deseja fazer
     public void Menu() {
