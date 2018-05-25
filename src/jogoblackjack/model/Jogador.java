@@ -17,7 +17,8 @@ public class Jogador {
     public Jogador(String user, String senha) {
         this.user = user;
         this.senha = senha;
-        listadecartas = new LinkedList();
+        this.listadecartas = new LinkedList();
+        this.maodecarta = new MaoDeCarta();
     }
 
     public String getUser() {

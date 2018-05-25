@@ -78,6 +78,7 @@ public class Partida {
             if (resposta == 1) {
                 user.pegarCarta(darCarta());
                 verificarGanhou(user);
+                imprimeCarta(user);
             }
 
         }
@@ -99,13 +100,7 @@ public class Partida {
             user.pegarCarta(darCarta());
             user.pegarCarta(darCarta());
 
-            Iterator iterator = user.cartas().iterator();
-            System.out.println("Cartas do jogador " + user.getUser());
-
-            while (iterator.hasNext()) {
-                carta = (Carta) iterator.next();
-                System.out.println(carta);
-            }
+            imprimeCarta(user);
         }
         System.out.println("Cartas do Croupier");
         carta = (Carta) croupier.pegarCarta(darCarta());
@@ -113,6 +108,15 @@ public class Partida {
         System.out.println(carta);
         croupier.pegarCarta(darCarta());
         System.out.println("Carta desconhecida");//segunda carta do croupier fica para baixo
+    }
+
+    public void imprimeCarta(Jogador user) {
+        iterador = user.cartas().iterator();
+        System.out.println("Cartas do jogador " + user.getUser());
+        while (iterador.hasNext()) {
+            carta = (Carta) iterador.next();
+            System.out.println(carta);
+        }
     }
 
     public void limiteCroupier() {
@@ -128,7 +132,7 @@ public class Partida {
 
         while (iterador.hasNext()) { //imprime todas as cartas do croupier
             carta = (Carta) iterador.next();
-            System.out.print(carta);
+            System.out.println(carta);
         }
     }
 
@@ -143,17 +147,15 @@ public class Partida {
         }
     }
 
-    public void verificarQuemGanhou(){
+    public void verificarQuemGanhou() {
         iterador = this.jogadoresDaPartida.iterator();
-        while(iterador.hasNext()){
+        while (iterador.hasNext()) {
             user = (Jogador) iterador.next();
             //alguma coisa para comparar os pontos de um com outro e depois com o do croupier
-            
-            
+
             user.setJogosVencidos(user.getJogosVencidos() + 1);
-        }            
-    
-    
+        }
+
     }
 
 }

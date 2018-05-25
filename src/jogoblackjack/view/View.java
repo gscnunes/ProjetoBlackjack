@@ -20,7 +20,7 @@ public class View {
         int sair = 1;
 
         do {
-            System.out.println("[1] - Cadastrar jogadores\n[2] - Iniciar Partida\n[0] - Sair");
+            System.out.println("[1] - Cadastrar jogadores\n[2] - Iniciar Partida\n[3] - Gerar Arquivo de Texto\n[0] - Sair");
             opcao = scan.nextInt();
             switch (opcao) {
 
@@ -30,6 +30,8 @@ public class View {
                 case 2:
                     controllerMenu.iniciarPartida();
                     break;
+                case 3:
+                    //controllerArquivo;
                 case 0:
                     sair = 0;
                     break;
