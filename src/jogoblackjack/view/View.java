@@ -23,7 +23,6 @@ public class View {
             System.out.println("[1] - Cadastrar jogadores\n[2] - Iniciar Partida\n[0] - Sair");
             opcao = scan.nextInt();
             switch (opcao) {
-
                 case 1:
                     controllerMenu.cadastrarPessoa();
                     break;
@@ -36,10 +35,6 @@ public class View {
                 default: 
                     System.out.println("Opção invalida");
             }
-
-        } while (sair == 1);
-               
-        
-        
+        } while (sair == 1); 
     }       
 }

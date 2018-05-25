@@ -11,9 +11,6 @@ public class MaoDeCarta {
     private int pontos;
     private Ilist lista;
 
-    public MaoDeCarta() {
-        lista = new LinkedList();
-    }
 
     //retorna o total de pontos na mão
     public int CartasNaMao(Ilist maodecarta) {
@@ -41,6 +38,7 @@ public class MaoDeCarta {
                 case "AS":
                     aux = valorAs(maodecarta);
                     break;
+                
                 default:
                     aux = Integer.parseInt(temp.getNumero());
             }
@@ -60,10 +58,10 @@ public class MaoDeCarta {
             }
         }
         return 1;
-    }
+    } 
 
-    public Ilist getLista() {
-        return lista;
+    public void setPontos(int pontos) {
+        this.pontos = pontos;
     }
     
     

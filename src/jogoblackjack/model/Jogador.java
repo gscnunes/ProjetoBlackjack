@@ -17,9 +17,8 @@ public class Jogador {
     public Jogador(String user, String senha) {
         this.user = user;
         this.senha = senha;
-        listadecartas = new LinkedList();
         maodecarta = new MaoDeCarta();
-        listadecartas = maodecarta.getLista();
+        listadecartas = new LinkedList();
     }
 
     public String getUser() {
@@ -70,11 +69,21 @@ public class Jogador {
     public Ilist getCartas() { //como esse método faz a mesma coisa que um get faria, deixei assim porque tava meio confuso
         return listadecartas;
     }
+    
+    public void setCartas(Ilist nova){
+        this.listadecartas = nova;
+    }
 
     @Override
     public String toString() { //criei esse aqui também pra facilitar
         return user;
     }
+
+    public void setMaodecarta(MaoDeCarta maodecarta) {
+        this.maodecarta = maodecarta;
+    }
+    
+    
     
     
 }

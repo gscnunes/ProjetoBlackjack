@@ -14,7 +14,7 @@ public class Controller {
 
     public Controller() {
         this.jogadores = new LinkedList();
-        scan = new Scanner (System.in); //MUDEI AQUI
+        scan = new Scanner(System.in); //MUDEI AQUI
     }
 
     //adiciona jogador na lista encadeada
@@ -25,10 +25,10 @@ public class Controller {
     //inicia uma partida fazendo o usuario escolher a quantidade de jogadores
     public void iniciarPartida() {
 
-        if(jogadores.isEmpty()){
+        if (jogadores.isEmpty()) {
             System.out.println("Não há jogadores cadastrados!");
-        }
-        else{
+        } else {
+
             int numDeJogadores;
             System.out.println("Digite a quantidade de jogadores: ");
             numDeJogadores = scan.nextInt();
@@ -39,12 +39,10 @@ public class Controller {
             partida = new Partida(numDeJogadores);
             partida.addJogadorNaPartida(jogadores);
             partida.pegarCarta();
+
         }
+
     }
-        
-        
-       
-    
 
 //    //cria um baralho, embaralha e coloca dentro de uma variavel
 //    public void criarBaralho() {
