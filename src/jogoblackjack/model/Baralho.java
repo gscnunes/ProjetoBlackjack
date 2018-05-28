@@ -91,4 +91,10 @@ public class Baralho {
         }
         return pcartas;
     }
+
+    public Carta[] getCartas() {
+        return cartas;
+    }
+    
+    
 }
