@@ -3,10 +3,10 @@ package jogoblackjack.controller;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import jogoblackjack.model.Jogador;
-import jogoblackjack.model.Partida;
-import jogoblackjack.util.Ilist;
-import jogoblackjack.util.LinkedList;
+
+import jogoblackjack.model.*;
+import jogoblackjack.util.*;
+
 
 public class Controller {
 
@@ -33,13 +33,16 @@ public class Controller {
         
         if (jogadores.isEmpty()) {
             System.out.println("Não há jogadores cadastrados!");
-        } else {
+        } 
+        else {
 
             int numDeJogadores;
-            System.out.println("Digite a quantidade de jogadores: ");
-            numDeJogadores = scan.nextInt();
-            while (numDeJogadores > 5) {
-                System.out.println("Número de jogadores acima do limite, digite novamente: ");
+            System.out.println("Digite a quantidade de jogadores [1-5]: ");            
+            
+            numDeJogadores = scan.nextInt();            
+            
+            while (numDeJogadores > jogadores.size() || numDeJogadores > 5) {
+                System.out.println("Número de jogadores fora do limite, digite novamente: ");
                 numDeJogadores = scan.nextInt();
             }
             partida = new Partida(numDeJogadores);
@@ -50,11 +53,17 @@ public class Controller {
 
     }
     
-    
-    
+    public void placar(){
+        LinkedList jogadores = controllerArquivo.reader();
+        
+        
+        
+    }
 
-//    //cria um baralho, embaralha e coloca dentro de uma variavel
-//    public void criarBaralho() {
-//        cartas = baralho.embaralharEAddPilha();
-//    } 
+    public Ilist getJogadores() {
+        return jogadores;
+    }
+    
+    
+ 
 }

@@ -38,12 +38,11 @@ public class Partida {
 
     //adiciona um jogador na partida
     public void addJogadorNaPartida(Ilist jogadores) {
-        if (jogadores.isEmpty()) { //caso não exista nenhum jogador registrado
-            System.out.println("Cadatre um jogador");
-            return;
-        }
+        
         for (int i = 0; i < numDeJogadores; i++) {
-            System.out.println("Digite o user do Jogador:");
+            int indice = i+1;
+            
+            System.out.println("\nDigite o user do Jogador " + indice + ": ");
             String jogador = scan.nextLine();
 
             iterador = jogadores.iterator();
@@ -51,12 +50,12 @@ public class Partida {
                 Jogador jog = (Jogador) iterador.next();
 
                 if (jogador.equals(jog.getUser())) {
-                    System.out.println("Digite a senha");
+                    System.out.println("\nDigite a senha:");
                     String senha = scan.nextLine();
                     if (senha.equals(jog.getSenha())) {
                         jogadoresDaPartida.addLast(jog); //adiciona em uma nova lista para ser utilizada depois
                     } else {
-                        System.out.println("Senha incorreta");
+                        System.out.println("\nSenha incorreta:");
                     }
                 }
             }

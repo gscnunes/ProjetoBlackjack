@@ -15,20 +15,15 @@ public class ControllerArquivo {
             BufferedWriter buffer = new BufferedWriter(arquivo);
             PrintWriter escritor = new PrintWriter(arquivo);
             
-            escritor.println(jogador.getUser() + " " + jogador.getSenha());  
+            escritor.println(jogador.getUser() + " " + jogador.getSenha() + " " +jogador.getPontTotal() + " " + jogador.getJogosVencidos());  
             
             escritor.flush();            
-            escritor.close();
-            //arquivo.flush();
+            escritor.close();            
             arquivo.close();
             
         }
         catch(Exception e){
-            System.out.println("Erro ao escrever arquivo!");
-            e.getMessage();            
-            System.out.println(e);
-            e.printStackTrace();
-            System.out.println(e);
+            System.out.println("Erro ao escrever arquivo!");            
         } 
     }
     
@@ -38,25 +33,26 @@ public class ControllerArquivo {
         try{             
             File arq = new File("jogadoresCadastrados.txt");             
             String user, senha;
+            int pontTotal, jogosVencidos;
+            
             Scanner scan = new Scanner(new FileReader(arq)).useDelimiter(" |\n");
             
             while(scan.hasNext()){
                 user = scan.next();
                 senha = scan.next();
-
-                System.out.println(user + " " + senha);
+                pontTotal = Integer.parseInt(scan.next());
+                jogosVencidos = Integer.parseInt(scan.next());
                 
                 jogador = new Jogador(user, senha);
+                jogador.setPontTotal(pontTotal);  //CORRIGIR!!
+                jogador.setJogosVencidos(jogosVencidos); 
+                
                 jogadoresCadastrados.addLast(jogador);                
             } 
             scan.close();
         }
         catch(Exception e){
-            System.out.println("Erro ao ler arquivo!");
-            e.getMessage();            
-            System.out.println(e);
-            e.printStackTrace();
-            System.out.println(e);
+            System.out.println("Erro ao ler arquivo!");            
         }
         return jogadoresCadastrados; 
     }

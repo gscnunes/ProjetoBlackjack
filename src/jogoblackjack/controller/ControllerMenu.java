@@ -31,9 +31,24 @@ public class ControllerMenu {
     
     public void listaJogadores(){       
         
+        Ilist jogadores = controller.getJogadores();
+        Iterator cursor = jogadores.iterator();
         
         
-        
+        if(jogadores.isEmpty()){
+            System.out.println("Não há jogadores cadastrados!");
+        }
+        else{ 
+            
+            Jogador jogador;
+
+            while(cursor.hasNext()){
+                jogador = (Jogador)cursor.next();   
+                System.out.println("User: " + jogador + "\nPontos: " + jogador.getPontTotal() + 
+                                   "\nJogos vencidos: " + jogador.getJogosVencidos() + "\n"); 
+                
+            }
+        }
     }
 
     //começa uma partida
