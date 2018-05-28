@@ -37,9 +37,9 @@ public class Croupier extends Jogador {
     public void setCartas(Ilist nova) {
         this.listadecartas = nova;
     }
-     
+    
     @Override
-    public void setMaodecarta(MaoDeCarta maodecarta) {
-        this.maodecarta = maodecarta;
+    public void novaLista(){
+        this.listadecartas = new LinkedList();
     }
 }

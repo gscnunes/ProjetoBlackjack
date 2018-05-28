@@ -5,7 +5,7 @@ import jogoblackjack.util.*;
 
 public class Partida {
 
-    private Scanner scan = new Scanner(System.in);
+    private Scanner scan;
     private int numDeJogadores;
     private Ilist jogadoresDaPartida;
     private Baralho baralho;
@@ -16,6 +16,7 @@ public class Partida {
     Carta carta;
 
     public Partida(int numDeJogadores) {
+        this.scan  = new Scanner(System.in);
         this.croupier = new Croupier("Croupier", "123");
         this.numDeJogadores = numDeJogadores;
         this.baralho = new Baralho();
@@ -90,10 +91,9 @@ public class Partida {
         iterador = jogadoresDaPartida.iterator();
         while (iterador.hasNext()) {
             user = (Jogador) iterador.next();
-            user.setCartas(null);
-            user.setMaodecarta(null);
+            user.novaLista();
         }
-        croupier.setMaodecarta(null);
+        croupier.novaLista();
     }
 
     public void setLista(Ilist lista) {
@@ -155,12 +155,12 @@ public class Partida {
         while (iterador.hasNext()) {
             user = (Jogador) iterador.next();
             if (verificarEstourou(user)) {
-                System.out.println("Jogador " + user.getUser());
+                System.out.print("Jogador " + user.getUser());
                 System.out.println(" estourou");
-                user.setCartas(null);
+                user.novaLista();
                 verificarQuemGanhou();
-            } else if (user.cartasNaMao() == 21) {
-                System.out.println("Jogador " + user.getUser());
+            }else if (user.cartasNaMao() == 21) {
+                System.out.print("Jogador " + user.getUser());
                 System.out.println(" fez 21");
                 user.setJogosVencidos(user.getJogosVencidos() + 1);
             }         
@@ -191,7 +191,7 @@ public class Partida {
 
     public boolean rodarCroupier(Jogador jogadorMaior) {
         if (verificarEstourou(croupier)) {
-            croupier.setCartas(null);
+            croupier.novaLista();
             return false;
         } else if (croupier.cartasNaMao() > jogadorMaior.cartasNaMao()) {
             System.out.println("Croupier ganhou");

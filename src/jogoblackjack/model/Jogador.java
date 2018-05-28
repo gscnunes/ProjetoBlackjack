@@ -50,6 +50,10 @@ public class Jogador {
     public void setJogosVencidos(int jogosvencidos) {
         this.jogosvencidos = jogosvencidos;
     }
+    
+    public void novaLista(){
+        this.listadecartas = new LinkedList();
+    }
 
     //retorna a carta que o jogador acabou de pegar
     public void pegarCarta(Carta carta) {
@@ -73,9 +77,5 @@ public class Jogador {
     @Override
     public String toString() { //criei esse aqui também pra facilitar
         return user;
-    }
-
-    public void setMaodecarta(MaoDeCarta maodecarta) {
-        this.maodecarta = maodecarta;
     }
 }
