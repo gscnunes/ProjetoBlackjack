@@ -2,10 +2,8 @@ package jogoblackjack.controller;
 
 import java.io.Console;
 import java.util.Scanner;
-import jogoblackjack.model.Baralho;
-import jogoblackjack.model.Jogador;
-import jogoblackjack.util.IStack;
-import jogoblackjack.util.Pilha;
+import jogoblackjack.model.*;
+import jogoblackjack.util.*;
 
 public class ControllerMenu {
 
@@ -29,6 +27,13 @@ public class ControllerMenu {
         
         //controller = new Controller(); //CORREÇÃO AQUI
         controller.addJogador(jogador);//metodo para adicionar os jogadores na lista
+    }
+    
+    public void listaJogadores(){       
+        
+        
+        
+        
     }
 
     //começa uma partida

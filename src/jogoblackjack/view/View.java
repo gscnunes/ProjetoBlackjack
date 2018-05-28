@@ -20,13 +20,16 @@ public class View {
         int sair = 1;
 
         do {
-            System.out.println("[1] - Cadastrar jogadores\n[2] - Iniciar Partida\n[0] - Sair");
+            System.out.println("[1] - Cadastrar jogadores\n[2] - 0Listar todos os jogadores\n[3] - Iniciar Partida\n[0] - Sair");
             opcao = scan.nextInt();
             switch (opcao) {
                 case 1:
                     controllerMenu.cadastrarPessoa();
                     break;
                 case 2:
+                    controllerMenu.listaJogadores();
+                    break;                            
+                case 3:
                     controllerMenu.iniciarPartida();
                     break;
                 case 0:

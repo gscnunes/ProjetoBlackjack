@@ -1,5 +1,7 @@
 package jogoblackjack.controller;
 
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import jogoblackjack.model.Jogador;
 import jogoblackjack.model.Partida;
@@ -11,20 +13,24 @@ public class Controller {
     private Scanner scan;
     private Ilist jogadores;
     private Partida partida;
+    private ControllerArquivo controllerArquivo;
 
     public Controller() {
-        this.jogadores = new LinkedList();
-        scan = new Scanner(System.in); //MUDEI AQUI
+        scan = new Scanner(System.in);
+        controllerArquivo = new ControllerArquivo();        
+        jogadores = controllerArquivo.reader();
+        
     }
 
     //adiciona jogador na lista encadeada
     public void addJogador(Jogador jogador) {
-        this.jogadores.addLast(jogador);
+        controllerArquivo.writer(jogador); 
+        jogadores.addLast(jogador);
     }
 
     //inicia uma partida fazendo o usuario escolher a quantidade de jogadores
-    public void iniciarPartida() {
-
+    public void iniciarPartida() {   
+        
         if (jogadores.isEmpty()) {
             System.out.println("Não há jogadores cadastrados!");
         } else {
@@ -43,6 +49,9 @@ public class Controller {
         }
 
     }
+    
+    
+    
 
 //    //cria um baralho, embaralha e coloca dentro de uma variavel
 //    public void criarBaralho() {
