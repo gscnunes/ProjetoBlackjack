@@ -2,7 +2,6 @@ package jogoblackjack.model;
 
 import jogoblackjack.util.Ilist;
 import jogoblackjack.util.Iterator;
-import jogoblackjack.util.LinkedList;
 
 public class MaoDeCarta {
 
