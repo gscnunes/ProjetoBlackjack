@@ -1,4 +1,4 @@
-package testblackjack.util;
+package jogoblackjack.util;
 
 import jogoblackjack.model.Jogador;
 import jogoblackjack.util.Iterator;
