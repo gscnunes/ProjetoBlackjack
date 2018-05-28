@@ -2,10 +2,8 @@ package jogoblackjack.controller;
 
 import java.io.Console;
 import java.util.Scanner;
-import jogoblackjack.model.Baralho;
-import jogoblackjack.model.Jogador;
-import jogoblackjack.util.IStack;
-import jogoblackjack.util.Pilha;
+import jogoblackjack.model.*;
+import jogoblackjack.util.*;
 
 public class ControllerMenu {
 
@@ -27,8 +25,30 @@ public class ControllerMenu {
         
         Jogador jogador = new Jogador(user, senha);//mando os auxiliares como parâmetro para a criação do novo jogador
         
-        //controller = new Controller(); //CORREÇÃO AQUI
+        
         controller.addJogador(jogador);//metodo para adicionar os jogadores na lista
+    }
+    
+    public void listaJogadores(){       //CRIEI ESSE MÉTODO PRA LISTAR TODOS OS JOGADORES CADASTRADOS
+        
+        Ilist jogadores = controller.getJogadores();
+        Iterator cursor = jogadores.iterator();
+        
+        
+        if(jogadores.isEmpty()){
+            System.out.println("Não há jogadores cadastrados!");
+        }
+        else{ 
+            
+            Jogador jogador;
+
+            while(cursor.hasNext()){
+                jogador = (Jogador)cursor.next();   
+                System.out.println("User: " + jogador + "\nPontos: " + jogador.getPontTotal() + 
+                                   "\nJogos vencidos: " + jogador.getJogosVencidos() + "\n"); 
+                
+            }
+        }
     }
 
     //começa uma partida

@@ -1,4 +1,4 @@
-package testblackjack.util;
+package jogoblackjack.util;
 
 import jogoblackjack.model.Carta;
 import jogoblackjack.util.IStack;
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Stacktest {
+public class StackTest {
 
     IStack pilha;
     Object carta1, carta2, carta3;

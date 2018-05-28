@@ -1,5 +1,6 @@
 package jogoblackjack.model;
 
+import jogoblackjack.controller.Controller;
 import jogoblackjack.util.Ilist;
 import jogoblackjack.util.LinkedList;
 
@@ -39,8 +40,8 @@ public class Jogador {
         return ponttotal;
     }
 
-    public void setPontTotal(int ponttotal) {
-        this.ponttotal = 10 * jogosvencidos;
+    public void setPontTotal(int ponttotal) { //TIVE QUE MODIFICAR AQUI E O "jogosVencidos" POR CAUSA DO ARQUIVO
+        this.ponttotal = ponttotal;
     }
 
     public int getJogosVencidos() {
@@ -50,14 +51,12 @@ public class Jogador {
     public void setJogosVencidos(int jogosvencidos) {
         this.jogosvencidos = jogosvencidos;
     }
-    
-    public void novaLista(){
-        this.listadecartas = new LinkedList();
-    }
 
     //retorna a carta que o jogador acabou de pegar
-    public void pegarCarta(Carta carta) {
+    public Object pegarCarta(Carta carta) {
         this.listadecartas.addLast(carta);
+        
+        return carta;
     }
 
     //retorna os pontos do jogador
@@ -78,4 +77,8 @@ public class Jogador {
     public String toString() { //criei esse aqui também pra facilitar
         return user;
     }
+    
+    public void setMaodecarta(MaoDeCarta maodecarta) {
+        this.maodecarta = maodecarta;
+    }   
 }

@@ -6,17 +6,12 @@ import jogoblackjack.util.LinkedList;
 
 public class MaoDeCarta {
 
-    private Baralho baralho;
-    private Croupier croupier;
     private int pontos;
-    private Ilist lista;
 
-
-    public MaoDeCarta(){
-        this.pontos = 0;
-    }
     //retorna o total de pontos na mão
     public int CartasNaMao(Ilist maodecarta) {
+
+        pontos = 0;
 
         Carta temp;
 
@@ -41,7 +36,7 @@ public class MaoDeCarta {
                 case "AS":
                     aux = valorAs(maodecarta);
                     break;
-                
+
                 default:
                     aux = Integer.parseInt(temp.getNumero());
             }
@@ -57,15 +52,15 @@ public class MaoDeCarta {
         while (cursor.hasNext()) {
             temp = (Carta) cursor.next();
             if (temp.getNumero().equals("K") || temp.getNumero().equals("Q") || temp.getNumero().equals("J")) {
-                return 11;
+                if (maodecarta.size() == 2) {
+                    return 11;
+                }
             }
         }
         return 1;
-    } 
+    }
 
     public void setPontos(int pontos) {
         this.pontos = pontos;
     }
-    
-    
 }

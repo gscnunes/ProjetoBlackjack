@@ -1,46 +1,73 @@
 package jogoblackjack.controller;
 
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.Scanner;
-import jogoblackjack.model.Jogador;
-import jogoblackjack.model.Partida;
-import jogoblackjack.util.Ilist;
-import jogoblackjack.util.LinkedList;
+
+import jogoblackjack.model.*;
+import jogoblackjack.util.*;
+
 
 public class Controller {
 
     private Scanner scan;
     private Ilist jogadores;
     private Partida partida;
+    private ControllerArquivo controllerArquivo;
 
     public Controller() {
-        this.jogadores = new LinkedList();
-        scan = new Scanner(System.in); //MUDEI AQUI
+        scan = new Scanner(System.in);
+        controllerArquivo = new ControllerArquivo();        
+        jogadores = controllerArquivo.reader();
+        
     }
 
     //adiciona jogador na lista encadeada
     public void addJogador(Jogador jogador) {
-        this.jogadores.addLast(jogador);
+        controllerArquivo.writer(jogador); 
+        jogadores.addLast(jogador);
     }
 
     //inicia uma partida fazendo o usuario escolher a quantidade de jogadores
-    public void iniciarPartida() {
-
+    public void iniciarPartida() {   
+        
         if (jogadores.isEmpty()) {
             System.out.println("Não há jogadores cadastrados!");
-        } else {
+        } 
+        else {
 
             int numDeJogadores;
-            System.out.println("Digite a quantidade de jogadores: ");
-            numDeJogadores = scan.nextInt();
-            while (numDeJogadores > 5) {
-                System.out.println("Número de jogadores acima do limite, digite novamente: ");
-                numDeJogadores = scan.nextInt();
+            System.out.println("Digite a quantidade de jogadores [1-5]: ");            
+            
+            numDeJogadores = scan.nextInt();            
+            
+//            while (numDeJogadores > jogadores.size() || numDeJogadores > 5) {
+//                System.out.println("Número de jogadores fora do limite, digite novamente: ");
+//                numDeJogadores = scan.nextInt();
+//            }
+            while(numDeJogadores!=1 && numDeJogadores!=2 && numDeJogadores!=3 && numDeJogadores!=4 && numDeJogadores!=5){
+                System.out.println("Digite novamente");
+                numDeJogadores = scan.nextInt();  
             }
             partida = new Partida(numDeJogadores);
-            partida.setNumDeJogadores(numDeJogadores);
             partida.addJogadorNaPartida(jogadores);
             partida.pegarCarta();
-            partida.setLista(null);
+
         }
+
     }
+    
+    public void placar(){
+        LinkedList jogadores = controllerArquivo.reader();
+        
+        
+        
+    }
+
+    public Ilist getJogadores() {
+        return jogadores;
+    }
+    
+    
+ 
 }

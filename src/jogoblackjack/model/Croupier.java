@@ -11,13 +11,13 @@ public class Croupier extends Jogador {
     public Croupier(String user, String senha) {
         super(user, senha);
         listadecartas = new LinkedList();
-        this.maodecarta = new MaoDeCarta();
-
     }
 
     //retorna a carta que o croupier acabou de pegar
-    public Object pegarCartas(Carta carta) {
+    @Override
+    public Object pegarCarta(Carta carta) {
         this.listadecartas.addLast(carta);
+        this.maodecarta = new MaoDeCarta();
         return carta;
     }
 
@@ -31,15 +31,5 @@ public class Croupier extends Jogador {
     @Override
     public Ilist getCartas() {
         return listadecartas;
-    }
-
-    @Override
-    public void setCartas(Ilist nova) {
-        this.listadecartas = nova;
-    }
-    
-    @Override
-    public void novaLista(){
-        this.listadecartas = new LinkedList();
     }
 }
