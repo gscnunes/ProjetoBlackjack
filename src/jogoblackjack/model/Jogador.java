@@ -1,6 +1,5 @@
 package jogoblackjack.model;
 
-import jogoblackjack.controller.Controller;
 import jogoblackjack.util.Ilist;
 import jogoblackjack.util.LinkedList;
 
@@ -12,7 +11,6 @@ public class Jogador {
     private int jogosvencidos;
     private Ilist listadecartas;
     private MaoDeCarta maodecarta;
-    private Controller controller;
 
     public Jogador(String user, String senha) {
         this.user = user;
@@ -54,10 +52,8 @@ public class Jogador {
     }
 
     //retorna a carta que o jogador acabou de pegar
-    public Object pegarCarta(Carta carta) {
+    public void pegarCarta(Carta carta) {
         this.listadecartas.addLast(carta);
-        
-        return carta;
     }
 
     //retorna os pontos do jogador
@@ -82,8 +78,4 @@ public class Jogador {
     public void setMaodecarta(MaoDeCarta maodecarta) {
         this.maodecarta = maodecarta;
     }
-    
-    
-    
-    
 }

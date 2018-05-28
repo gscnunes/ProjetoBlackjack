@@ -37,15 +37,10 @@ public class Controller {
                 numDeJogadores = scan.nextInt();
             }
             partida = new Partida(numDeJogadores);
+            partida.setNumDeJogadores(numDeJogadores);
             partida.addJogadorNaPartida(jogadores);
             partida.pegarCarta();
-
+            partida.setLista(null);
         }
-
     }
-
-//    //cria um baralho, embaralha e coloca dentro de uma variavel
-//    public void criarBaralho() {
-//        cartas = baralho.embaralharEAddPilha();
-//    } 
 }

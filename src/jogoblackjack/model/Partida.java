@@ -1,8 +1,6 @@
 package jogoblackjack.model;
 
 import java.util.Scanner;
-import jogoblackjack.controller.Controller;
-
 import jogoblackjack.util.*;
 
 public class Partida {
@@ -13,11 +11,9 @@ public class Partida {
     private Baralho baralho;
     private Pilha monteCartas;
     private Croupier croupier;
-    private Controller controller;
-    private boolean ganhou;
     Jogador user;
     Iterator iterador;
-    Carta carta, pegaCarta;
+    Carta carta;
 
     public Partida(int numDeJogadores) {
         this.croupier = new Croupier("Croupier", "123");
@@ -25,7 +21,6 @@ public class Partida {
         this.baralho = new Baralho();
         this.monteCartas = baralho.embaralharEAddPilha();
         this.jogadoresDaPartida = new LinkedList();
-        ganhou = true;
     }
 
     public int getNumDeJogadores() {
@@ -67,6 +62,7 @@ public class Partida {
     //melhorar isso
     public void pegarCarta() { //distribui e imprimir as cartas dos jogadores
         int resposta, resp = 0;
+        boolean ganhou = true;
         do {
             iterador = jogadoresDaPartida.iterator();
             //meto1do pedir nova carta
@@ -80,24 +76,28 @@ public class Partida {
                 if (resposta == 1) {
                     user.pegarCarta(darCarta());
                     mostrarMao(user);
-                } else {
+                } else if (resposta == 2) {
                     resp++;
                 }
             }
             if (resp == numDeJogadores) {
                 ganhou = false;
             }
-        } while (getGanhou());
+        } while (ganhou == true);
         limiteCroupier();
         cartasDoCroupier();
         verificarGanhou();
         iterador = jogadoresDaPartida.iterator();
-        while(iterador.hasNext()){
+        while (iterador.hasNext()) {
             user = (Jogador) iterador.next();
             user.setCartas(null);
             user.setMaodecarta(null);
         }
-        jogadoresDaPartida = null;
+        croupier.setMaodecarta(null);
+    }
+
+    public void setLista(Ilist lista) {
+        this.jogadoresDaPartida = lista;
     }
 
     public boolean verificarEstourou(Jogador user) {
@@ -120,7 +120,7 @@ public class Partida {
             mostrarMao(user);
         }
         System.out.println("Cartas do Croupier");
-        carta = (Carta) croupier.pegarCarta(darCarta());
+        carta = (Carta) croupier.pegarCartas(darCarta());
 
         System.out.println("");
         System.out.println(carta);
@@ -132,8 +132,7 @@ public class Partida {
 
     public void limiteCroupier() {
         while (croupier.cartasNaMao() <= 17) {//croupier pega cartas ate tentar vencer ou ser maior ou igual a 17
-            pegaCarta = darCarta();
-            croupier.pegarCarta(pegaCarta);
+            croupier.pegarCartas(darCarta());
         }
     }
 
@@ -158,14 +157,14 @@ public class Partida {
             if (verificarEstourou(user)) {
                 System.out.println("Jogador " + user.getUser());
                 System.out.println(" estourou");
+                user.setCartas(null);
                 verificarQuemGanhou();
-
             } else if (user.cartasNaMao() == 21) {
                 System.out.println("Jogador " + user.getUser());
                 System.out.println(" fez 21");
                 user.setJogosVencidos(user.getJogosVencidos() + 1);
-
-            } else {
+            }         
+            else {
                 verificarQuemGanhou();
             }
         }
@@ -178,7 +177,7 @@ public class Partida {
         while (iterador.hasNext()) {
             user = (Jogador) iterador.next();
 
-            if (user.cartasNaMao() > jogadorMaior.cartasNaMao()) {
+            if (jogadorMaior.cartasNaMao() < user.cartasNaMao()) {
                 jogadorMaior = user;
             }
         }
@@ -188,11 +187,13 @@ public class Partida {
         System.out.println("Jogador " + jogadorMaior + " ganhou!");
 
         jogadorMaior.setJogosVencidos(user.getJogosVencidos() + 1);
-
     }
 
     public boolean rodarCroupier(Jogador jogadorMaior) {
-        if (croupier.cartasNaMao() > jogadorMaior.cartasNaMao()) {
+        if (verificarEstourou(croupier)) {
+            croupier.setCartas(null);
+            return false;
+        } else if (croupier.cartasNaMao() > jogadorMaior.cartasNaMao()) {
             System.out.println("Croupier ganhou");
             return true;
         }
@@ -212,9 +213,5 @@ public class Partida {
             System.out.println("");
         }
         System.out.println("");
-    }
-
-    public boolean getGanhou() {
-        return ganhou;
     }
 }

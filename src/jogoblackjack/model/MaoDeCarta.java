@@ -12,6 +12,9 @@ public class MaoDeCarta {
     private Ilist lista;
 
 
+    public MaoDeCarta(){
+        this.pontos = 0;
+    }
     //retorna o total de pontos na mão
     public int CartasNaMao(Ilist maodecarta) {
 
