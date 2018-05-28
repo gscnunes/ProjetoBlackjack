@@ -15,9 +15,10 @@ public class Partida {
     private Croupier croupier;
     private Controller controller;
     private boolean ganhou;
-    Jogador user;
-    Iterator iterador;
-    Carta carta, pegaCarta;
+    private Jogador user;
+    private Iterator iterador;
+    private Carta carta, pegaCarta;
+    
 
     public Partida(int numDeJogadores) {
         this.croupier = new Croupier("Croupier", "123");
@@ -37,69 +38,97 @@ public class Partida {
     }
 
     //adiciona um jogador na partida
-    public void addJogadorNaPartida(Ilist jogadores) {
+    public void addJogadorNaPartida(Ilist jogadores) { //MUDEI BASTANTE ESSE MÉTODO, PRA QUE TRATASSE OS ERROS DIREITINHO
+        
+        String user, senha;
+        iterador = jogadores.iterator();
+        Jogador jogador;
+        boolean contains = false;
         
         for (int i = 0; i < numDeJogadores; i++) {
-            int indice = i+1;
+           
+            int indice = i+1;     
             
-            System.out.println("\nDigite o user do Jogador " + indice + ": ");
-            String jogador = scan.nextLine();
-
-            iterador = jogadores.iterator();
-            while (iterador.hasNext()) {//verificar se o user digitado existe
-                Jogador jog = (Jogador) iterador.next();
-
-                if (jogador.equals(jog.getUser())) {
-                    System.out.println("\nDigite a senha:");
-                    String senha = scan.nextLine();
-                    if (senha.equals(jog.getSenha())) {
-                        jogadoresDaPartida.addLast(jog); //adiciona em uma nova lista para ser utilizada depois
-                    } else {
-                        System.out.println("\nSenha incorreta:");
-                    }
+            System.out.println("\nDigite o User do jogador " + indice + ":");
+            user = scan.nextLine();           
+            
+            while(contains == false){
+                while(iterador.hasNext()){
+                    jogador = (Jogador)iterador.next();
+                    if(user.equals(jogador.getUser())){
+                        contains = true;
+                        
+                        System.out.println("\nDigite a senha: ");
+                        senha = scan.nextLine();
+                        while(!senha.equals(jogador.getSenha())){
+                            System.out.println("\nSenha incorreta, digite novamente!");
+                            senha = scan.nextLine();
+                        }
+                        jogadoresDaPartida.addLast(jogador); 
+                        break;
+                    }                
+                }
+                if(!contains){
+                   System.out.println("\nJogador não encontrado, digite novamente!");
+                   user = scan.nextLine(); 
+                   iterador = jogadores.iterator();
+                   
                 }
             }
+            contains = false;
         }
         cartasInicioDaPartida();
     }
 
     //melhorar isso
-    public void pegarCarta() { //distribui e imprimir as cartas dos jogadores
-        int resposta, resp = 0;
+    public void pegarCarta() { //TAMBÉM ARRUMEI ESSE, TÁ PEGANDO AS CARTAS DIREITINHO
+        int resposta, naoPegar = 0;
         do {
             iterador = jogadoresDaPartida.iterator();
             //meto1do pedir nova carta
             while (iterador.hasNext()) {
                 user = (Jogador) iterador.next();
 
-                System.out.print("Jogador " + user.getUser());
+                System.out.print("\nJogador " + user.getUser());
                 System.out.println(" deseja pegar carta? [1] - SIM [2] - NÃO");//jogador quer mais cartas. pode colocar em um metodo
                 resposta = scan.nextInt();
-
-                if (resposta == 1) {
+                
+                while(resposta == 1){
                     user.pegarCarta(darCarta());
                     mostrarMao(user);
-                } else {
-                    resp++;
+                    if(verificarEstourou(user)){
+                        System.out.println("\nJogador " + user.getUser()+ " estourou!");
+                        break;
+                    } 
+                    System.out.print("\nJogador " + user.getUser());
+                    System.out.println(" deseja pegar carta? [1] - SIM [2] - NÃO");//jogador quer mais cartas. pode colocar em um metodo
+                    resposta = scan.nextInt();
                 }
+                naoPegar++;  
             }
-            if (resp == numDeJogadores) {
+            if (naoPegar == numDeJogadores) {
                 ganhou = false;
             }
         } while (getGanhou());
+        
         limiteCroupier();
         cartasDoCroupier();
         verificarGanhou();
         iterador = jogadoresDaPartida.iterator();
-        while(iterador.hasNext()){
+        while(iterador.hasNext()){ //ESSA PARTE SERVE PRA ZERAR AS MÃOS DOS JOGADORES E A LISTA DOS JOGADORES DA PARTIDA
+            
+            LinkedList novasCartas = new LinkedList();
+            MaoDeCarta novaMao = new MaoDeCarta();
+            
             user = (Jogador) iterador.next();
-            user.setCartas(null);
-            user.setMaodecarta(null);
+            user.setCartas(novasCartas);
+            user.setMaodecarta(novaMao);
         }
-        jogadoresDaPartida = null;
+        LinkedList novaLista = new LinkedList();
+        jogadoresDaPartida = novaLista;
     }
 
-    public boolean verificarEstourou(Jogador user) {
+    public boolean verificarEstourou(Jogador user) {   
         return user.cartasNaMao() > 21;
     }
 
@@ -154,15 +183,11 @@ public class Partida {
 
         while (iterador.hasNext()) {
             user = (Jogador) iterador.next();
-            if (verificarEstourou(user)) {
-                System.out.println("Jogador " + user.getUser());
-                System.out.println(" estourou");
-                verificarQuemGanhou();
 
-            } else if (user.cartasNaMao() == 21) {
-                System.out.println("Jogador " + user.getUser());
-                System.out.println(" fez 21");
+            if (user.cartasNaMao() == 21) {
+                System.out.println("\nJogador " + user.getUser() + " fez 21!");                
                 user.setJogosVencidos(user.getJogosVencidos() + 1);
+                user.setPontTotal(user.getPontTotal() + 10);
 
             } else {
                 verificarQuemGanhou();
@@ -177,7 +202,7 @@ public class Partida {
         while (iterador.hasNext()) {
             user = (Jogador) iterador.next();
 
-            if (user.cartasNaMao() > jogadorMaior.cartasNaMao()) {
+            if (user.cartasNaMao() > jogadorMaior.cartasNaMao() && user.cartasNaMao() < 21) {
                 jogadorMaior = user;
             }
         }
@@ -187,11 +212,12 @@ public class Partida {
         System.out.println("Jogador " + jogadorMaior + " ganhou!");
 
         jogadorMaior.setJogosVencidos(user.getJogosVencidos() + 1);
+        jogadorMaior.setPontTotal(jogadorMaior.getPontTotal() + 10);
 
     }
 
     public boolean rodarCroupier(Jogador jogadorMaior) {
-        if (croupier.cartasNaMao() > jogadorMaior.cartasNaMao()) {
+        if (croupier.cartasNaMao() > jogadorMaior.cartasNaMao() && croupier.cartasNaMao() < 21) {
             System.out.println("Croupier ganhou");
             return true;
         }
@@ -207,8 +233,7 @@ public class Partida {
 
         while (cursor.hasNext()) {
             carta = (Carta) cursor.next();
-            System.out.println(carta);
-            System.out.println("");
+            System.out.println(carta);            
         }
         System.out.println("");
     }

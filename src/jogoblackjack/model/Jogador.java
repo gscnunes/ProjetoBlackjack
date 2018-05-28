@@ -41,8 +41,8 @@ public class Jogador {
         return ponttotal;
     }
 
-    public void setPontTotal(int ponttotal) { //CORRIGIR
-        this.ponttotal = 10 * jogosvencidos;
+    public void setPontTotal(int ponttotal) { //TIVE QUE MODIFICAR AQUI E O "jogosVencidos" POR CAUSA DO ARQUIVO
+        this.ponttotal = ponttotal;
     }
 
     public int getJogosVencidos() {

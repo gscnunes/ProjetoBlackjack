@@ -44,7 +44,7 @@ public class ControllerArquivo {
                 jogosVencidos = Integer.parseInt(scan.next());
                 
                 jogador = new Jogador(user, senha);
-                jogador.setPontTotal(pontTotal);  //CORRIGIR!!
+                jogador.setPontTotal(pontTotal);
                 jogador.setJogosVencidos(jogosVencidos); 
                 
                 jogadoresCadastrados.addLast(jogador);                

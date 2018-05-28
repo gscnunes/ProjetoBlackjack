@@ -25,11 +25,11 @@ public class ControllerMenu {
         
         Jogador jogador = new Jogador(user, senha);//mando os auxiliares como parâmetro para a criação do novo jogador
         
-        //controller = new Controller(); //CORREÇÃO AQUI
+        
         controller.addJogador(jogador);//metodo para adicionar os jogadores na lista
     }
     
-    public void listaJogadores(){       
+    public void listaJogadores(){       //CRIEI ESSE MÉTODO PRA LISTAR TODOS OS JOGADORES CADASTRADOS
         
         Ilist jogadores = controller.getJogadores();
         Iterator cursor = jogadores.iterator();
