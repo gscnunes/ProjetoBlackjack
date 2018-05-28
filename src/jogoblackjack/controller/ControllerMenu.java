@@ -9,24 +9,17 @@ public class ControllerMenu {
 
     private Scanner scan = new Scanner(System.in);
     private Controller controller = new Controller();
+    private ControllerArquivo controllerArquivo = new ControllerArquivo();
    
-    //Opções do menu que o usuario digita o que ele deseja fazer
-    public void Menu() {
-        
-    }
+    
 
     //cadastrar todos os jogadores
-    public void cadastrarPessoa() {
-        System.out.println("Digite o user do Jogador:");        
-        String user = scan.nextLine(); //criei um auxiliar pra guardar o dado inserido
-        
-        System.out.println("Digite a senha do Jogador:");        
-        String senha = scan.nextLine();
+    public void cadastrarPessoa(String user, String senha) {
         
         Jogador jogador = new Jogador(user, senha);//mando os auxiliares como parâmetro para a criação do novo jogador
+        controllerArquivo.writer(jogador); 
+        controller.getJogadores().addLast(jogador);
         
-        
-        controller.addJogador(jogador);//metodo para adicionar os jogadores na lista
     }
     
     public void listaJogadores(){       //CRIEI ESSE MÉTODO PRA LISTAR TODOS OS JOGADORES CADASTRADOS
@@ -51,9 +44,5 @@ public class ControllerMenu {
         }
     }
 
-    //começa uma partida
-    public void iniciarPartida(){
-        controller.iniciarPartida();
-    }
 
 }

@@ -12,6 +12,7 @@ public class Jogador {
     private int jogosvencidos;
     private Ilist listadecartas;
     private MaoDeCarta maodecarta;
+    private Controller controller;
 
     public Jogador(String user, String senha) {
         this.user = user;
@@ -77,8 +78,12 @@ public class Jogador {
     public String toString() { //criei esse aqui também pra facilitar
         return user;
     }
-    
+
     public void setMaodecarta(MaoDeCarta maodecarta) {
         this.maodecarta = maodecarta;
-    }   
+    }
+    
+    
+    
+    
 }
