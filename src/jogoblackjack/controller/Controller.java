@@ -127,7 +127,8 @@ public class Controller {
 
                 System.out.print("\nJogador " + "'" + user + "'");
                 System.out.println(" deseja pegar carta? [1] - SIM [2] - NÃO");//jogador quer mais cartas. pode colocar em um metodo
-                resposta = scan.next();
+                mostrarMao(user);
+                resposta = scan.next();                
 
                 while ("1".equals(resposta)) {
                     user.pegarCarta(darCarta());
@@ -143,17 +144,15 @@ public class Controller {
                         break;
                     }
                     else if(verificar21(user)){
-                        System.out.println("\nJogador " + "'" + user + "'" + " fez 21!");
+                        System.out.println("\nJogador " + "'" + user + "'" + " alcançou o ♠BLACKJACK!♠");
                         user.setJogosVencidos(user.getJogosVencidos() + 1);
                         user.setPontTotal(user.getPontTotal() + 10);
-
-                        System.out.println("\n\nTESTE: " + user.getJogosVencidos() + " " + user.getPontTotal() + "\n\n");
-                        
                         break;
                     }
                     System.out.print("\nJogador " + "'" + user + "'");
                     System.out.println(" deseja pegar carta? [1] - SIM [2] - NÃO");//jogador quer mais cartas. pode colocar em um metodo
-                    resposta = scan.next();
+                    mostrarMao(user);
+                    resposta = scan.next();                    
                 }
                 naoPegar++;
             }
@@ -205,7 +204,7 @@ public class Controller {
 
     public void cartasDoCroupier() {
         Iterator iterador = croupier.getCartas().iterator();
-        System.out.println("Cartas do croupier:\n");
+        System.out.println("Cartas do croupier:");
 
         System.out.println("");
         while (iterador.hasNext()) { //imprime todas as cartas do croupier
@@ -244,9 +243,16 @@ public class Controller {
             //return;
         }
         else if(!rodarCroupier(jogadorMaior) && jogadorMaior.cartasNaMao() != 0){ //GANHA O JOGADOR COM A MAIOR MAO
-            System.out.println("Jogador " + "'" + jogadorMaior + "'" + " ganhou com a maior mão, valendo " + jogadorMaior.cartasNaMao() + " pontos!");
-            jogadorMaior.setJogosVencidos(jogadorMaior.getJogosVencidos() + 1);
-            jogadorMaior.setPontTotal(jogadorMaior.getPontTotal() + 10);
+            if(jogadorMaior.cartasNaMao() == 21){
+                System.out.println("Jogador " + "'" + jogadorMaior + "'" + " ganhou com ♠BLACKJACK!♠");
+                jogadorMaior.setJogosVencidos(jogadorMaior.getJogosVencidos() + 1);
+                jogadorMaior.setPontTotal(jogadorMaior.getPontTotal() + 10);
+            }
+            else{
+                System.out.println("Jogador " + "'" + jogadorMaior + "'" + " ganhou com a maior mão, valendo " + jogadorMaior.cartasNaMao() + " pontos!");
+                jogadorMaior.setJogosVencidos(jogadorMaior.getJogosVencidos() + 1);
+                jogadorMaior.setPontTotal(jogadorMaior.getPontTotal() + 10);
+            }
         }
         else{ //JOGADOR EMPATA COM O CROUPIER
             while (iterador.hasNext()) { 
