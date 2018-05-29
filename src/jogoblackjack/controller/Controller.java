@@ -55,9 +55,9 @@ public class Controller {
             croupier = partida.getCroupier();
             addJogadorNaPartida(jogadores);
             pegarCarta();
-
+        
         }
-
+        
     }
 
     /**
