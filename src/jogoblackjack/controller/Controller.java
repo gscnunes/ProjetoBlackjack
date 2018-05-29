@@ -32,6 +32,34 @@ public class Controller {
     }
 
     /**
+     * Método para cadastrar os jogadores no jogo
+     *
+     * @param user - user do jogador
+     * @param senha - senha do jogador
+     */
+    public void cadastrarPessoa(String user, String senha) {
+
+        Jogador jogador = new Jogador(user, senha);
+        controllerArquivo.writer(jogador);
+        jogadores.addLast(jogador);
+    }
+
+    /**
+     * Método para mostrar todos os jogadores cadastrados no programa
+     */
+    public void listaJogadores() {
+
+        Iterator iterador = jogadores.iterator();
+
+        System.out.println("\nEstão cadastrados ao todo " + jogadores.size() + " jogadores: ");
+
+        while (iterador.hasNext()) {
+            Jogador jogador = (Jogador) iterador.next();
+            System.out.println("\n" + jogador);
+        }
+    }
+
+    /**
      * Inicia a partida com o usuário escolhendo a quantidade de jogadores,
      * depois adiciona jogadores na partida e vai para o método do jogador pegar
      * nova carta
@@ -301,6 +329,10 @@ public class Controller {
         return false;
     }
 
+    /**
+     * Método que salva a lista de jogadores em um vetor, ordena esse vetor
+     * pelos pontos dos jogadores e cria um arquivo de texto com esse pontos
+     */
     public void placar() {
 
         Iterator cursor = jogadores.iterator();
@@ -323,6 +355,8 @@ public class Controller {
                 j--;
             }
         }
+
+        cursor = jogadores.iterator();
 
         for (Jogador aux : placar) {
             controllerArquivo.writerUpdate(aux);

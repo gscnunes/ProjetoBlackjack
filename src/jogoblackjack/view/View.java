@@ -30,7 +30,6 @@ do código, e estou ciente que estes trechos não serão considerados para fins 
 public class View {
 
     private static Controller controller = new Controller();
-    private static ControllerMenu controllerMenu = new ControllerMenu();
     private static Scanner scan = new Scanner(System.in);
 
     /**
@@ -63,11 +62,11 @@ public class View {
                     System.out.println("Digite a senha do Jogador:");
                     String senha = scan.next();
 
-                    controllerMenu.cadastrarPessoa(user, senha);
+                    controller.cadastrarPessoa(user, senha);
                     break;
 
                 case "2":
-                    controllerMenu.listaJogadores();
+                    controller.listaJogadores();
                     break;
 
                 case "3":

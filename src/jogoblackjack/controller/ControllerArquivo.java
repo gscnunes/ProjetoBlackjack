@@ -95,7 +95,7 @@ public class ControllerArquivo {
         return jogadoresCadastrados;
     }
 
-    public void deletar() {
+    public void deletar(){
         File file = new File("placar.txt");
         file.delete();
     }
