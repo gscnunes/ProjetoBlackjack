@@ -2,10 +2,7 @@ package jogoblackjack.model;
 
 import jogoblackjack.util.Ilist;
 import jogoblackjack.util.LinkedList;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

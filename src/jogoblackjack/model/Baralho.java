@@ -1,22 +1,34 @@
 package jogoblackjack.model;
 
 import java.util.Random;
-import jogoblackjack.util.IStack;
 import jogoblackjack.util.Pilha;
 
+/**
+ *
+ * @author Daniel Alves e Gabriela dos Santos
+ */
 public class Baralho {
 
     private Carta[] cartas;
     private Pilha pcartas;
 
+    /**
+     * Construtor da classe Baralho
+     *
+     */
     public Baralho() {
         this.cartas = new Carta[52];
         addCartas();
         pcartas = new Pilha();
     }
 
+    /**
+     * Método para criar todas as cartas do baralho
+     *
+     * @return cartas - vetor com todas as cartas criadas
+     */
     public Object[] addCartas() {
-        cartas[0] = new Carta("♣", "2", 1); //coloquei os naipes, ficou bonitinho ♥
+        cartas[0] = new Carta("♣", "2", 1);
         cartas[1] = new Carta("♣", "3", 2);
         cartas[2] = new Carta("♣", "4", 3);
         cartas[3] = new Carta("♣", "5", 4);
@@ -75,6 +87,12 @@ public class Baralho {
         return cartas;
     }
 
+    /**
+     * Método para embaralhar as cartas criadas e depois adiciona-las em uma
+     * pilha
+     *
+     * @return pcartas - pilha criada com as cartas embaralhadas
+     */
     public Pilha embaralharEAddPilha() {
         Random random = new Random();
 
@@ -92,9 +110,12 @@ public class Baralho {
         return pcartas;
     }
 
+    /**
+     *
+     * @return cartas - vetor com as cartas criadas
+     */
     public Carta[] getCartas() {
         return cartas;
     }
-    
-    
+
 }

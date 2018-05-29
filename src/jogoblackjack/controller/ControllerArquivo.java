@@ -4,16 +4,24 @@ import java.io.*;
 import java.util.Scanner;
 import jogoblackjack.model.*;
 import jogoblackjack.util.LinkedList;
-import jogoblackjack.util.Ilist;
 
+/**
+ *
+ * @author Daniel Alves e Gabriela dos Santos
+ */
 public class ControllerArquivo {
 
-    private LinkedList jogadoresCadastrados = new LinkedList();   
+    private LinkedList jogadoresCadastrados = new LinkedList();
 
+    /**
+     * Escreve no arquivo de texto um novo jogador
+     *
+     * @param jogador - novo jogador
+     */
     public void writer(Jogador jogador) {
         try {
             FileWriter arquivo = new FileWriter("jogadoresCadastrados.txt", true);
-            BufferedWriter buffer = new BufferedWriter(arquivo);//estar sem uso
+            BufferedWriter buffer = new BufferedWriter(arquivo);
             PrintWriter escritor = new PrintWriter(arquivo);
 
             escritor.println(jogador.getUser() + " " + jogador.getSenha() + " " + jogador.getPontTotal() + " " + jogador.getJogosVencidos());
@@ -26,7 +34,12 @@ public class ControllerArquivo {
             System.out.println("Erro ao escrever arquivo!");
         }
     }
-    
+
+    /**
+     * Gera um novo arquivo de texto mostrando o placar dos jogadores
+     *
+     * @param jogador - jogador que irá ser adicionado no arquivo de texto
+     */
     public void writerUpdate(Jogador jogador) {
 
         try {
@@ -40,13 +53,19 @@ public class ControllerArquivo {
             escritor.close();
             arquivo.close();
 
-        } 
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Erro ao escrever arquivo!");
         }
 
     }
 
+    /**
+     * Ler o arquivo de texto com os jogadores salvos e salva eles no programa
+     * para poderem ser utilizados
+     *
+     * @return jogadoresCadastrados - lista com os jogadores que estão salvos no
+     * arquivo
+     */
     public LinkedList reader() {
         Jogador jogador;
 
@@ -75,10 +94,13 @@ public class ControllerArquivo {
         }
         return jogadoresCadastrados;
     }
-    
-    public void deletar(){
+
+    /**
+     * Método para deletar o placar anterior quando inicia uma nova partida
+     */
+    public void deletar() {
         File file = new File("placar.txt");
         file.delete();
-    } 
+    }
 
 }

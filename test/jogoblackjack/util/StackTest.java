@@ -1,8 +1,6 @@
 package jogoblackjack.util;
 
 import jogoblackjack.model.Carta;
-import jogoblackjack.util.IStack;
-import jogoblackjack.util.Pilha;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;

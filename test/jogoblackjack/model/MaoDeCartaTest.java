@@ -39,12 +39,11 @@ public class MaoDeCartaTest {
 
     @Test
     public void valorDoAs() {
-        lista.addLast(carta5);
-        lista.addFirst(carta4);
-
-        assertEquals(11, maodecarta.valorAs(lista));
-
         lista.addLast(carta1);
-        assertEquals(1, maodecarta.valorAs(lista));
+        lista.addLast(carta4);
+        assertEquals(13,maodecarta.CartasNaMao(lista));
+        
+        lista.addFirst(carta2);
+        assertEquals(12, maodecarta.CartasNaMao(lista));
     }
 }

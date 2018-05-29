@@ -11,7 +11,7 @@ public class CroupierTest {
     Croupier croupier;
     Ilist lista;
     Carta carta1, carta2;
-    
+
     @Before
     public void setUp() throws Exception {
         lista = new LinkedList();
@@ -19,13 +19,13 @@ public class CroupierTest {
         carta1 = new Carta("♣", "2", 1);
         carta2 = new Carta("♦", "7", 45);
     }
-    
+
     @Test
     public void testPegarCarta() {
         assertSame(carta1, croupier.pegarCarta(carta1));
         assertSame(carta2, croupier.pegarCarta(carta2));
     }
-    
+
     @Test
     public void testCartasNaMao() {
         croupier.pegarCarta(carta1);
@@ -33,7 +33,7 @@ public class CroupierTest {
 
         assertEquals(9, croupier.cartasNaMao());
     }
-    
+
     @Test
     public void testGetCartas() {
         croupier.pegarCarta(carta1);

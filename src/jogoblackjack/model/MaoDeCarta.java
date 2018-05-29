@@ -3,11 +3,20 @@ package jogoblackjack.model;
 import jogoblackjack.util.Ilist;
 import jogoblackjack.util.Iterator;
 
+/**
+ *
+ * @author Daniel Alves e Gabriela dos Santos
+ */
 public class MaoDeCarta {
 
     private int pontos;
 
-    //retorna o total de pontos na mão
+    /**
+     * Método para retornar a quantidade de pontos que o jogador tem na mão
+     *
+     * @param maodecarta - recebe uma lista de cartas
+     * @return pontos - quantidade de pontos
+     */
     public int CartasNaMao(Ilist maodecarta) {
 
         pontos = 0;
@@ -44,6 +53,12 @@ public class MaoDeCarta {
         return pontos;
     }
 
+    /**
+     * Método para saber qual é o valor do Ás
+     *
+     * @param maodecarta - recebe a lista de carta
+     * @return retorna um inteiro que depende das cartas que o jogador tem
+     */
     public int valorAs(Ilist maodecarta) {
         Iterator cursor = maodecarta.iterator();
         Carta temp;
@@ -53,24 +68,25 @@ public class MaoDeCarta {
             if (temp.getNumero().equals("K") || temp.getNumero().equals("Q") || temp.getNumero().equals("J")) {
                 if (maodecarta.size() == 2) {
                     return 11;
-                }
-                if(pontos >= 10){
+                } else if (pontos >= 10) {
                     return 1;
-                }
-                else{
+                } else {
                     return 11;
                 }
-            }
-            if(pontos >= 10){
+            } else if (pontos >= 10) {
                 return 1;
-            }
-            else{
+            } else {
                 return 11;
             }
         }
         return 1;
     }
 
+    /**
+     * Método para setar os pontos da mão
+     *
+     * @param pontos - pontos que irá receber
+     */
     public void setPontos(int pontos) {
         this.pontos = pontos;
     }

@@ -16,8 +16,6 @@ import org.junit.runners.*;
         JogadorTest.class,
         MaoDeCartaTest.class,
         ControllerTest.class,
-        ControllerArquivoTest.class,
-        ControllerMenuTest.class,
 })
 public class AllTests { }
 

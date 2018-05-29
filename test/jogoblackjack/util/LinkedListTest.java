@@ -1,8 +1,6 @@
 package jogoblackjack.util;
 
 import jogoblackjack.model.Jogador;
-import jogoblackjack.util.Iterator;
-import jogoblackjack.util.LinkedList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
