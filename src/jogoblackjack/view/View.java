@@ -87,7 +87,7 @@ public class View {
 
     /**
      * Quando a partida acaba é exibido esse menu com as opções que o usuário
-     * pode escolher
+     * pode escolher o que quer fazer em seguida
      */
     public static void menuFimPartida() {
 
