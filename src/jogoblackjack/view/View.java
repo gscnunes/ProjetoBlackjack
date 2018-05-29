@@ -67,8 +67,7 @@ public class View {
         do{
             System.out.println("\nO que você deseja?\n"
                              + "[1] - Listar cartas restantes\n"
-                             + "[2] - Listar cartas restantes ordenadas\n"
-                             + "[3] - Gerar arquivo com placar\n"
+                             + "[2] - Listar cartas restantes ordenadas\n"                             
                              + "[0] - Sair\n");
             
             String resp = scan.next();
@@ -81,10 +80,7 @@ public class View {
                 case"2":
                     ordenar = "sim";
                     controller.listarCartas(ordenar);
-                    break;
-                case"3":
-                    controller.placar();
-                    break;
+                    break;                
                 case"0":
                     sair = 0;
                     break;
