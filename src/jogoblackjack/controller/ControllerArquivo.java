@@ -36,6 +36,30 @@ public class ControllerArquivo {
     }
 
     /**
+     * Gera um novo arquivo de texto mostrando o placar dos jogadores
+     *
+     * @param jogador - jogador que irá ser adicionado no arquivo de texto
+     */
+    public void writerUpdate(Jogador jogador) {
+
+        try {
+            FileWriter arquivo = new FileWriter("placar.txt", true);
+            BufferedWriter buffer = new BufferedWriter(arquivo);
+            PrintWriter escritor = new PrintWriter(arquivo);
+
+            escritor.println(jogador.getUser() + " " + jogador.getPontTotal() + " " + jogador.getJogosVencidos());
+
+            escritor.flush();
+            escritor.close();
+            arquivo.close();
+
+        } catch (Exception e) {
+            System.out.println("Erro ao escrever arquivo!");
+        }
+
+    }
+
+    /**
      * Ler o arquivo de texto com os jogadores salvos e salva eles no programa
      * para poderem ser utilizados
      *

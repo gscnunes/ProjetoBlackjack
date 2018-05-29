@@ -55,10 +55,9 @@ public class ControllerMenu {
             System.out.println("\nEstão cadastrados ao todo " + jogadores.size() + " jogadores:\n");
             Jogador jogador;
 
-            while (cursor.hasNext()) {
-                jogador = (Jogador) cursor.next();
-                System.out.println("User: " + jogador + "\nPontos: " + jogador.getPontTotal()
-                        + "\nJogos vencidos: " + jogador.getJogosVencidos() + "\n");
+            while(cursor.hasNext()){
+                jogador = (Jogador)cursor.next();   
+                System.out.println("User: " + jogador); 
 
             }
         }

@@ -1,8 +1,0 @@
-gabs 123 0 0
-
-haha 666 0 0
-
-dan 123 0 0
-daniel 123 0 0
-gabriela 11 0 0
-dan 123 10 1

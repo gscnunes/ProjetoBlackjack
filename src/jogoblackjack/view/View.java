@@ -75,34 +75,30 @@ public class View {
         String ordenar;
         int sair = 1;
 
-        do {
+        do{
             System.out.println("\nO que você deseja?\n"
                     + "[1] - Listar cartas restantes\n"
                     + "[2] - Listar cartas restantes ordenadas\n"
-                    + "[3] - Gerar arquivo com placar\n"
                     + "[0] - Sair\n");
 
             String resp = scan.next();
 
-            switch (resp) {
+            switch (resp){
                 case "1":
                     ordenar = "nao";
                     controller.listarCartas(ordenar);
                     break;
-                case "2":
+                case"2":
                     ordenar = "sim";
                     controller.listarCartas(ordenar);
                     break;
-                case "3":
-                    controller.placar();
-                    break;
-                case "0":
+                case"0":
                     sair = 0;
                     break;
                 default:
                     System.out.println("\nOpção inválida! Digite novamente: ");
                     break;
             }
-        } while (sair == 1);
+        }while(sair == 1);
     }
 }
