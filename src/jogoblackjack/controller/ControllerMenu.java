@@ -41,8 +41,7 @@ public class ControllerMenu {
 
             while(cursor.hasNext()){
                 jogador = (Jogador)cursor.next();   
-                System.out.println("User: " + jogador + "\nPontos: " + jogador.getPontTotal() + 
-                                   "\nJogos vencidos: " + jogador.getJogosVencidos() + "\n"); 
+                System.out.println("User: " + jogador); 
                 
             }
         }
