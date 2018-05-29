@@ -10,7 +10,7 @@ public class BaralhoTest {
     Pilha pilha;
     Baralho baralho;
     Object[] test;
-    Object carta1, carta2;
+    Object carta1;
 
     @Before
     public void setUp() throws Exception {
@@ -18,8 +18,7 @@ public class BaralhoTest {
         baralho = new Baralho();
         test = baralho.addCartas();
         carta1 = new Carta("♦", "AS", 52);
-        carta2 = new Carta("♦", "K", 49);
-    }
+     }
 
     @Test
     public void criarBaralho() {
@@ -32,11 +31,6 @@ public class BaralhoTest {
             pilha.push(test1);
         }
         assertFalse(pilha.isEmpty());
-
-        assertSame(carta1, pilha.pop());
-        pilha.pop();
-        pilha.pop();
-        assertSame(carta2, pilha.pop());
     }
 
     @Test

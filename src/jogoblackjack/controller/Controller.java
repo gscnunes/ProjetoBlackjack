@@ -16,12 +16,14 @@ public class Controller {
     private ControllerArquivo controllerArquivo;
     private Croupier croupier;
     private boolean ganhou;
+    private Carta [] cartasRestantes;
 
     public Controller() {
         scan = new Scanner(System.in);
         controllerArquivo = new ControllerArquivo();
         jogadores = controllerArquivo.reader();
         jogadoresDaPartida = new LinkedList();
+        cartasRestantes = new Carta[52];
 
     }
 
@@ -63,57 +65,141 @@ public class Controller {
 
         Carta aux;
         int aux2;
-        int temp = 0;
-        int[] array = new int[52];
-        int i = 0;
-
+        int temp = 0;        
+        int[] arrayId = new int[52];
+        int i = 0;  
+        
+        
         while (!partida.getMonteCartas().isEmpty()) {
-            aux = (Carta) partida.getMonteCartas().pop();
-            System.out.println("\nCARTA RETIRADA DA PILHA: " + aux + " " + aux.getIdentificador());
-            array[i] = (aux.getIdentificador());            
+            aux = (Carta) partida.getMonteCartas().pop();            
+            cartasRestantes[i] = aux;                       
             i++;
             temp = i;
-        }        
+        }    
         
-        Baralho novoBaralho = new Baralho();
-        Carta[] cartas = novoBaralho.getCartas();
-        
-        
-        System.out.println("\nCartas restantes no monte: ");
         
         if("nao".equals(ordenar)){
-            for(int c = 0; c < temp; c++){
-                for (Carta carta : cartas) {
-                    if (array[c] == carta.getIdentificador()) {
-                        System.out.println("-----");
-                        System.out.println("\n" + carta);
-                    }
-                } 
+            System.out.println("\nCartas restantes no monte:");
+            for(Carta carta: cartasRestantes){
+                if(carta == null){
+                    break;
+                }
+                System.out.println("-----");
+                System.out.println("\n" + carta); 
+                
             }
-        }  
-        
-        else if("sim".equals(ordenar)){            
-            for(i = 1; i < array.length; i++){
+        }
+        else{
+            i = 0;
+            
+            for(Carta carta: cartasRestantes){
+                if(carta == null){
+                    break;
+                }
+                arrayId[i] = carta.getIdentificador();
+                i++;
+            }
+            
+            
+            for(i = 1; i < arrayId.length; i++){
                 int j = i;
             
-                while(j > 0 && array[j] < array[j-1]){
-                    aux2 = array[j];
-                    array[j] = array[j-1];
-                    array[j-1] = aux2; 
+                while(j > 0 && arrayId[j] < arrayId[j-1]){
+                    aux2 = arrayId[j];
+                    arrayId[j] = arrayId[j-1];
+                    arrayId[j-1] = aux2; 
                     j--;
                 }
             }
             System.out.println("Cartas restantes no monte ordenadas: \n");
             
-            for(int id: array){
-               for (Carta carta : cartas) {
+            for(int id: arrayId){
+               for (Carta carta : cartasRestantes) {
+                    if(carta == null){
+                       break;
+                    } 
                     if (id == carta.getIdentificador()) {
                         System.out.println("-----");
-                        System.out.println("\n" + carta);
+                        System.out.println(carta);
                     }
                 } 
             }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+//        while (!partida.getMonteCartas().isEmpty()) {
+//            aux = (Carta) partida.getMonteCartas().pop();
+//            System.out.println("\nCARTA RETIRADA DA PILHA: " + aux + " " + aux.getIdentificador());
+//            arrayCartas[i] = new Carta(aux.getNaipe(), aux.getNumero(), aux.getIdentificador());
+//            arrayId[i] = (aux.getIdentificador());            
+//            i++;
+//            temp = i;
+//        }        
+//        
+//        
+//        Baralho novoBaralho = new Baralho();
+//        Carta[] cartas = novoBaralho.getCartas();
+//        
+//        
+//        System.out.println("\nCartas restantes no monte: ");
+//        
+//        if("nao".equals(ordenar)){
+//            for(int c = 0; c < temp; c++){
+//                for (Carta carta : cartas) {
+//                    if (arrayId[c] == carta.getIdentificador()) {
+//                        System.out.println("-----");
+//                        System.out.println("\n" + carta);
+//                    }
+//                } 
+//            }
+//        }  
+//        
+//        else if("sim".equals(ordenar)){            
+//            for(i = 1; i < arrayId.length; i++){
+//                int j = i;
+//            
+//                while(j > 0 && array[j] < array[j-1]){
+//                    aux2 = array[j];
+//                    array[j] = array[j-1];
+//                    array[j-1] = aux2; 
+//                    j--;
+//                }
+//            }
+//            System.out.println("Cartas restantes no monte ordenadas: \n");
+//            
+//            for(int id: array){
+//               for (Carta carta : cartas) {
+//                    if (id == carta.getIdentificador()) {
+//                        System.out.println("-----");
+//                        System.out.println("\n" + carta);
+//                    }
+//                } 
+//            }
+//        }
         
 
     }
@@ -206,32 +292,20 @@ public class Controller {
         System.out.println("");
     }
 
-    public void verificarGanhou() {
-        Iterator iterador = jogadoresDaPartida.iterator();
-
-        while (iterador.hasNext()) {
-            Jogador user = (Jogador) iterador.next();
-
-            if (user.cartasNaMao() == 21) {
-                System.out.println("\nJogador " + user.getUser() + " fez 21!");
-                user.setJogosVencidos(user.getJogosVencidos() + 1);
-                user.setPontTotal(user.getPontTotal() + 10);
-
-            } else {
-                verificarQuemGanhou();
-            }
-        }
+    
+    public boolean verificar21(Jogador user){
+        return user.cartasNaMao() == 21;
     }
 
     public void verificarQuemGanhou() {
-        Iterator iterador = this.jogadoresDaPartida.iterator();
+        Iterator iterador = jogadoresDaPartida.iterator();
         Jogador jogadorMaior = (Jogador) iterador.next();
         Jogador user;
 
         while (iterador.hasNext()) {
             user = (Jogador) iterador.next();
 
-            if (user.cartasNaMao() > jogadorMaior.cartasNaMao() && user.cartasNaMao() < 21) {
+            if (user.cartasNaMao() < 21 && user.cartasNaMao() > jogadorMaior.cartasNaMao()) {
                 jogadorMaior = user;
             }
         }
@@ -247,7 +321,7 @@ public class Controller {
 
     public boolean rodarCroupier(Jogador jogadorMaior) {
         if (croupier.cartasNaMao() > jogadorMaior.cartasNaMao() && croupier.cartasNaMao() < 21) {
-            System.out.println("Croupier ganhou");
+            System.out.println("O croupier ganhou!");
             return true;
         }
         return false;
@@ -290,6 +364,18 @@ public class Controller {
                     mostrarMao(user);
                     if (verificarEstourou(user)) {
                         System.out.println("\nJogador " + user.getUser() + " estourou!");
+                        
+                        LinkedList novasCartas = new LinkedList();                        
+                        MaoDeCarta novaMao = new MaoDeCarta();
+                        
+                        user.setCartas(novasCartas);
+                        user.setMaodecarta(novaMao);
+                        break;
+                    }
+                    else if(verificar21(user)){
+                        System.out.println("\nJogador " + user.getUser() + " fez 21!");
+                        user.setJogosVencidos(user.getJogosVencidos() + 1);
+                        user.setPontTotal(user.getPontTotal() + 10);                        
                         break;
                     }
                     System.out.print("\nJogador " + user.getUser());
@@ -305,7 +391,7 @@ public class Controller {
 
         limiteCroupier();
         cartasDoCroupier();
-        verificarGanhou();
+        verificarQuemGanhou();
         zerarValores();
     }
 

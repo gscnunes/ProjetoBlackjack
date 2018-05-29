@@ -32,10 +32,11 @@ public class ControllerMenu {
         
         
         if(jogadores.isEmpty()){
-            System.out.println("Não há jogadores cadastrados!");
+            System.out.println("\nNão há jogadores cadastrados!");
         }
         else{ 
             
+            System.out.println("\nEstão cadastrados ao todo " + jogadores.size() + " jogadores:\n");
             Jogador jogador;
 
             while(cursor.hasNext()){
