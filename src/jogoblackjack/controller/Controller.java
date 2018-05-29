@@ -24,6 +24,24 @@ public class Controller {
         cartasRestantes = new Carta[52];
     }
 
+    public void cadastrarPessoa(String user, String senha) {
+        
+        Jogador jogador = new Jogador(user, senha);//mando os auxiliares como parâmetro para a criação do novo jogador
+        controllerArquivo.writer(jogador); 
+        jogadores.addLast(jogador);        
+    }
+    
+    public void listaJogadores(){       //CRIEI ESSE MÉTODO PRA LISTAR TODOS OS JOGADORES CADASTRADOS
+        
+        Iterator iterador = jogadores.iterator();
+        
+        System.out.println("\nEstão cadastrados ao todo " + jogadores.size() + " jogadores: ");
+        
+        while(iterador.hasNext()){
+            Jogador jogador = (Jogador) iterador.next();
+            System.out.println("\n" + jogador);
+        }
+    }
     
     //inicia uma partida fazendo o usuario escolher a quantidade de jogadores
     public void iniciarPartida() {

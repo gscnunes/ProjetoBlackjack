@@ -19,21 +19,36 @@ public class Jogador {
         maodecarta = new MaoDeCarta();
         listadecartas = new LinkedList();
     }
-
+   
+    //retorna a carta que o jogador acabou de pegar
+    public Object pegarCarta(Carta carta) {
+        this.listadecartas.addLast(carta);
+        
+        return carta;
+    }
+    //retorna os pontos do jogador
+    public int cartasNaMao() {
+        return maodecarta.CartasNaMao(listadecartas);
+    }
+    //lista de todas as cartas do jogador
+    public Ilist getCartas() { //como esse método faz a mesma coisa que um get faria, deixei assim porque tava meio confuso
+        return listadecartas;
+    } 
+    
+    public void setCartas(Ilist nova){
+        this.listadecartas = nova;
+    }    
+    
+    public void setMaodecarta(MaoDeCarta maodecarta) {
+        this.maodecarta = maodecarta;
+    }
+    
     public String getUser() {
         return user;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
-
     public String getSenha() {
         return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public int getPontTotal() {
@@ -51,38 +66,10 @@ public class Jogador {
     public void setJogosVencidos(int jogosvencidos) {
         this.jogosvencidos = jogosvencidos;
     }
-
-    //retorna a carta que o jogador acabou de pegar
-    public Object pegarCarta(Carta carta) {
-        this.listadecartas.addLast(carta);
-        
-        return carta;
-    }
-
-    //retorna os pontos do jogador
-    public int cartasNaMao() {
-        return maodecarta.CartasNaMao(listadecartas);
-    }
-
-    //lista de todas as cartas do jogador
-    public Ilist getCartas() { //como esse método faz a mesma coisa que um get faria, deixei assim porque tava meio confuso
-        return listadecartas;
-    }
     
-    public void setCartas(Ilist nova){
-        this.listadecartas = nova;
-    }
-
     @Override
     public String toString() { //criei esse aqui também pra facilitar
         return user;
     }
-
-    public void setMaodecarta(MaoDeCarta maodecarta) {
-        this.maodecarta = maodecarta;
-    }
-    
-    
-    
     
 }

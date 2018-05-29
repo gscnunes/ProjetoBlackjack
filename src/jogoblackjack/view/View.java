@@ -8,7 +8,7 @@ public class View {
     //Iniciar o programa e chama o metodo de menu do controllerMenu
     
     private static Controller controller = new Controller();
-    private static ControllerMenu controllerMenu = new ControllerMenu();
+    //private static ControllerMenu controllerMenu = new ControllerMenu();
     private static Scanner scan = new Scanner(System.in);
     
     
@@ -36,11 +36,11 @@ public class View {
                     System.out.println("Digite a senha do Jogador:");        
                     String senha = scan.next();
                     
-                    controllerMenu.cadastrarPessoa(user, senha);
+                    controller.cadastrarPessoa(user, senha);
                     break;
                     
                 case "2":
-                    controllerMenu.listaJogadores(); //NOVO MÉTODO
+                    controller.listaJogadores(); //NOVO MÉTODO
                     break;  
                     
                 case "3":
