@@ -1,17 +1,20 @@
 package jogoblackjack.controller;
 
-import java.io.Console;
 import java.util.Scanner;
 import jogoblackjack.model.*;
 import jogoblackjack.util.*;
 
 public class ControllerMenu {
 
-    private Scanner scan = new Scanner(System.in);
-    private Controller controller = new Controller();
-    private ControllerArquivo controllerArquivo = new ControllerArquivo();
-   
+    private Scanner scan; 
+    private Controller controller;
+    private ControllerArquivo controllerArquivo;
     
+    public ControllerMenu(){
+        scan = new Scanner(System.in); 
+        controller = new Controller();
+        controllerArquivo = new ControllerArquivo();
+    }
 
     //cadastrar todos os jogadores
     public void cadastrarPessoa(String user, String senha) {

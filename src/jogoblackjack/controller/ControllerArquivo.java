@@ -13,7 +13,7 @@ public class ControllerArquivo {
     public void writer(Jogador jogador) {
         try {
             FileWriter arquivo = new FileWriter("jogadoresCadastrados.txt", true);
-            BufferedWriter buffer = new BufferedWriter(arquivo);
+            BufferedWriter buffer = new BufferedWriter(arquivo);//estar sem uso
             PrintWriter escritor = new PrintWriter(arquivo);
 
             escritor.println(jogador.getUser() + " " + jogador.getSenha() + " " + jogador.getPontTotal() + " " + jogador.getJogosVencidos());

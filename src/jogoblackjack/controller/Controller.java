@@ -77,9 +77,7 @@ public class Controller {
 
         Carta aux;
         int aux2;
-        int temp = 0;
-        final Carta [] arrayCartas;
-        //arrayCartas = new Carta[52];
+        int temp = 0;        
         int[] arrayId = new int[52];
         int i = 0;  
         
