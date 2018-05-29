@@ -155,6 +155,7 @@ public class Controller {
 
                 System.out.print("\nJogador " + "'" + user + "'");
                 System.out.println(" deseja pegar carta? [1] - SIM [2] - NÃO");
+                mostrarMao(user);
                 resposta = scan.next();
 
                 while ("1".equals(resposta)) {
@@ -170,16 +171,14 @@ public class Controller {
                         user.setMaodecarta(novaMao);
                         break;
                     } else if (verificar21(user)) {
-                        System.out.println("\nJogador " + "'" + user + "'" + " fez 21!");
+                        System.out.println("\nJogador " + "'" + user + "'" + " alcançou o ♠BLACKJACK!♠");
                         user.setJogosVencidos(user.getJogosVencidos() + 1);
                         user.setPontTotal(user.getPontTotal() + 10);
-
-                        System.out.println("\n\nTESTE: " + user.getJogosVencidos() + " " + user.getPontTotal() + "\n\n");
-
                         break;
                     }
                     System.out.print("\nJogador " + "'" + user + "'");
                     System.out.println(" deseja pegar carta? [1] - SIM [2] - NÃO");
+                    mostrarMao(user);
                     resposta = scan.next();
                 }
                 naoPegar++;
@@ -243,7 +242,7 @@ public class Controller {
      */
     public void cartasDoCroupier() {
         Iterator iterador = croupier.getCartas().iterator();
-        System.out.println("Cartas do croupier:\n");
+        System.out.println("Cartas do croupier:");
 
         System.out.println("");
         while (iterador.hasNext()) {
@@ -297,10 +296,17 @@ public class Controller {
 
         if (rodarCroupier(jogadorMaior)) {
             System.out.println("O croupier ganhou com a maior mão, valendo " + croupier.cartasNaMao() + " pontos!");
+
         } else if (!rodarCroupier(jogadorMaior) && jogadorMaior.cartasNaMao() != 0) {
-            System.out.println("Jogador " + "'" + jogadorMaior + "'" + " ganhou com a maior mão, valendo " + jogadorMaior.cartasNaMao() + " pontos!");
-            jogadorMaior.setJogosVencidos(jogadorMaior.getJogosVencidos() + 1);
-            jogadorMaior.setPontTotal(jogadorMaior.getPontTotal() + 10);
+            if (jogadorMaior.cartasNaMao() == 21) {
+                System.out.println("Jogador " + "'" + jogadorMaior + "'" + " ganhou com ♠BLACKJACK!♠");
+                jogadorMaior.setJogosVencidos(jogadorMaior.getJogosVencidos() + 1);
+                jogadorMaior.setPontTotal(jogadorMaior.getPontTotal() + 10);
+            } else {
+                System.out.println("Jogador " + "'" + jogadorMaior + "'" + " ganhou com a maior mão, valendo " + jogadorMaior.cartasNaMao() + " pontos!");
+                jogadorMaior.setJogosVencidos(jogadorMaior.getJogosVencidos() + 1);
+                jogadorMaior.setPontTotal(jogadorMaior.getPontTotal() + 10);
+            }
         } else {
             while (iterador.hasNext()) {
                 user = (Jogador) iterador.next();

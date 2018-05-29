@@ -52,6 +52,5 @@ public class MaoDeCartaTest {
 
         lista.addFirst(carta2);
         assertEquals(1, maodecarta.valorAs(lista));
-
     }
 }

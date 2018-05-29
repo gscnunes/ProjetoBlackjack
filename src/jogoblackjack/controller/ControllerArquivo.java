@@ -95,7 +95,10 @@ public class ControllerArquivo {
         return jogadoresCadastrados;
     }
 
-    public void deletar(){
+    /**
+     * Método para deletar o placar anterior quando inicia uma nova partida
+     */
+    public void deletar() {
         File file = new File("placar.txt");
         file.delete();
     }
