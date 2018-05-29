@@ -1,5 +1,3 @@
-gabs 123 0 0
-haha 666 0 0
 dan 123 0 0
-joe 22 0 0
-xx xx 0 0
+haha 666 0 0
+
