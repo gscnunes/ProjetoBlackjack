@@ -12,7 +12,6 @@ public class Jogador {
     private int jogosvencidos;
     private Ilist listadecartas;
     private MaoDeCarta maodecarta;
-    private Controller controller;
 
     public Jogador(String user, String senha) {
         this.user = user;
