@@ -8,7 +8,7 @@ public class ControllerMenu {
 
     private Scanner scan; 
     private Controller controller;
-    private ControllerArquivo controllerArquivo;
+    private ControllerArquivo controllerArquivo;    
     
     public ControllerMenu(){
         scan = new Scanner(System.in); 
@@ -26,26 +26,14 @@ public class ControllerMenu {
     }
     
     public void listaJogadores(){       //CRIEI ESSE MÉTODO PRA LISTAR TODOS OS JOGADORES CADASTRADOS
+        Ilist lista = controller.getJogadores();
+        Iterator iterador = lista.iterator();
         
-        Ilist jogadores = controller.getJogadores();
-        Iterator cursor = jogadores.iterator();
+        System.out.println("\nEstão cadastrados ao todo " + lista.size() + " jogadores: ");
         
-        
-        if(jogadores.isEmpty()){
-            System.out.println("\nNão há jogadores cadastrados!");
-        }
-        else{ 
-            
-            System.out.println("\nEstão cadastrados ao todo " + jogadores.size() + " jogadores:\n");
-            Jogador jogador;
-
-            while(cursor.hasNext()){
-                jogador = (Jogador)cursor.next();   
-                System.out.println("User: " + jogador); 
-                
-            }
+        while(iterador.hasNext()){
+            Jogador jogador = (Jogador) iterador.next();
+            System.out.println("\n" + jogador);
         }
     }
-
-
 }

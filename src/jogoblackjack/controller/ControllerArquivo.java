@@ -8,7 +8,7 @@ import jogoblackjack.util.Ilist;
 
 public class ControllerArquivo {
 
-    private LinkedList jogadoresCadastrados = new LinkedList();
+    private LinkedList jogadoresCadastrados = new LinkedList();   
 
     public void writer(Jogador jogador) {
         try {
@@ -26,7 +26,7 @@ public class ControllerArquivo {
             System.out.println("Erro ao escrever arquivo!");
         }
     }
-
+    
     public void writerUpdate(Jogador jogador) {
 
         try {
@@ -75,5 +75,10 @@ public class ControllerArquivo {
         }
         return jogadoresCadastrados;
     }
+    
+    public void deletar(){
+        File file = new File("placar.txt");
+        file.delete();
+    } 
 
 }
