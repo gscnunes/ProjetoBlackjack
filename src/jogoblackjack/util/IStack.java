@@ -2,7 +2,8 @@ package jogoblackjack.util;
 
 /**
  *
- * @author Daniel Alves e Gabriela dos Santos
+ * @author Daniel Alves e Gabriela dos Santos. Código baseado nos slides do
+ * professor João Batista
  */
 public interface IStack {
 

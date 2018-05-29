@@ -93,7 +93,6 @@ public class Jogador {
         this.jogosvencidos = jogosvencidos;
     }
 
-    //retorna a carta que o jogador acabou de pegar
     /**
      * Método para salvar na lista de cartas a carta que está recebendo por
      * paramentro
@@ -120,7 +119,7 @@ public class Jogador {
      *
      * @return listadecartas
      */
-    public Ilist getCartas() { //como esse método faz a mesma coisa que um get faria, deixei assim porque tava meio confuso
+    public Ilist getCartas() {
         return listadecartas;
     }
 

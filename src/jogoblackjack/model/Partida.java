@@ -12,9 +12,10 @@ public class Partida {
     private LinkedList jogadoresDaPartida;
     private Baralho baralho;
     private Pilha monteCartas;
-    private Croupier croupier;  
+    private Croupier croupier;
 
-    /**Construtor da classe Partida
+    /**
+     * Construtor da classe Partida
      *
      * @param numDeJogadores - recebe o número de jogadores da partida
      */
@@ -32,16 +33,17 @@ public class Partida {
      */
     public int getNumDeJogadores() {
         return numDeJogadores;
-    }    
+    }
 
     /**
      *
-     * @return jogadoresDaPartida - lista com todos os jogadores da partida atual
+     * @return jogadoresDaPartida - lista com todos os jogadores da partida
+     * atual
      */
     public LinkedList getJogadoresDaPartida() {
         return jogadoresDaPartida;
     }
-    
+
     /**
      *
      * @return croupier - croupier utilizado na partida
@@ -57,5 +59,5 @@ public class Partida {
     public Pilha getMonteCartas() {
         return monteCartas;
     }
-   
+
 }

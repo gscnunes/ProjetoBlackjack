@@ -21,7 +21,7 @@ public class ControllerArquivo {
     public void writer(Jogador jogador) {
         try {
             FileWriter arquivo = new FileWriter("jogadoresCadastrados.txt", true);
-            BufferedWriter buffer = new BufferedWriter(arquivo);//estar sem uso
+            BufferedWriter buffer = new BufferedWriter(arquivo);
             PrintWriter escritor = new PrintWriter(arquivo);
 
             escritor.println(jogador.getUser() + " " + jogador.getSenha() + " " + jogador.getPontTotal() + " " + jogador.getJogosVencidos());
@@ -74,7 +74,7 @@ public class ControllerArquivo {
             String user, senha;
             int pontTotal, jogosVencidos;
 
-            Scanner scan = new Scanner(new FileReader(arq));//.useDelimiter(" |\n");
+            Scanner scan = new Scanner(new FileReader(arq)).useDelimiter(" |\n");
 
             while (scan.hasNext()) {
                 user = scan.next();
@@ -94,4 +94,10 @@ public class ControllerArquivo {
         }
         return jogadoresCadastrados;
     }
+
+    public void deletar() {
+        File file = new File("placar.txt");
+        file.delete();
+    }
+
 }

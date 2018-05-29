@@ -33,7 +33,7 @@ public class ControllerMenu {
      */
     public void cadastrarPessoa(String user, String senha) {
 
-        Jogador jogador = new Jogador(user, senha);//mando os auxiliares como parâmetro para a criação do novo jogador
+        Jogador jogador = new Jogador(user, senha);
         controllerArquivo.writer(jogador);
         controller.getJogadores().addLast(jogador);
 
@@ -43,24 +43,16 @@ public class ControllerMenu {
      * Mostra no console todos os jogadores que já estão cadastrados
      *
      */
-    public void listaJogadores() {  
+    public void listaJogadores() {
 
-        Ilist jogadores = controller.getJogadores();
-        Iterator cursor = jogadores.iterator();
+        Ilist lista = controller.getJogadores();
+        Iterator iterador = lista.iterator();
 
-        if (jogadores.isEmpty()) {
-            System.out.println("\nNão há jogadores cadastrados!");
-        } else {
+        System.out.println("\nEstão cadastrados ao todo " + lista.size() + " jogadores: ");
 
-            System.out.println("\nEstão cadastrados ao todo " + jogadores.size() + " jogadores:\n");
-            Jogador jogador;
-
-            while(cursor.hasNext()){
-                jogador = (Jogador)cursor.next();   
-                System.out.println("User: " + jogador); 
-
-            }
+        while (iterador.hasNext()) {
+            Jogador jogador = (Jogador) iterador.next();
+            System.out.println("\n" + jogador);
         }
     }
-
 }

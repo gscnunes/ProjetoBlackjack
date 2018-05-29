@@ -12,33 +12,33 @@ public class PartidaTest {
     Partida partida;
     Croupier croupier;
     Pilha pilha;
-    
+
     @Before
     public void setUp() throws Exception {
         partida = new Partida(3);
     }
-    
+
     @Test
-    public void testgetNumDeJogadores(){
+    public void testgetNumDeJogadores() {
         assertEquals(3, partida.getNumDeJogadores());
     }
-    
+
     @Test
-    public void testLista(){
+    public void testLista() {
         lista = partida.getJogadoresDaPartida();
         assertTrue(lista.isEmpty());
     }
-    
+
     @Test
-    public void testCroupier(){
+    public void testCroupier() {
         croupier = partida.getCroupier();
         assertSame("Croupier", croupier.getUser());
         assertSame("123", croupier.getSenha());
     }
-    
+
     @Test
-    public void testMonteCartas(){
+    public void testMonteCartas() {
         pilha = partida.getMonteCartas();
-        assertFalse(pilha.isEmpty()); 
+        assertFalse(pilha.isEmpty());
     }
 }

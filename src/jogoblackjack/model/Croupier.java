@@ -6,7 +6,8 @@ package jogoblackjack.model;
  */
 public class Croupier extends Jogador {
 
-    /**Construtor da classe Croupier
+    /**
+     * Construtor da classe Croupier
      *
      * @param user - user do croupier
      * @param senha - senha do croupier

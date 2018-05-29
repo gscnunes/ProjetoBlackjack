@@ -3,6 +3,26 @@ package jogoblackjack.view;
 import java.util.Scanner;
 import jogoblackjack.controller.*;
 
+/*******************************************************************************
+
+Autor: Daniel Alves Costa e Gabriela dos Santos Costa Nunes
+
+Componente Curricular: Programação 
+
+Concluido em: 29/05/2018
+
+Declaro que este código foi elaborado por mim e minha dupla e não contém nenhum
+
+trecho de código de outro colega ou de outro autor, tais como provindos de livros e
+
+apostilas, e páginas ou documentos eletrônicos da Internet. Qualquer trecho de código
+
+de outra autoria que não a minha está destacado com uma citação para o autor e a fonte
+
+do código, e estou ciente que estes trechos não serão considerados para fins de avaliação.
+
+******************************************************************************************/
+
 /**
  *
  * @author Daniel Alves e Gabriela dos Santos
@@ -75,7 +95,7 @@ public class View {
         String ordenar;
         int sair = 1;
 
-        do{
+        do {
             System.out.println("\nO que você deseja?\n"
                     + "[1] - Listar cartas restantes\n"
                     + "[2] - Listar cartas restantes ordenadas\n"
@@ -83,22 +103,22 @@ public class View {
 
             String resp = scan.next();
 
-            switch (resp){
+            switch (resp) {
                 case "1":
                     ordenar = "nao";
                     controller.listarCartas(ordenar);
                     break;
-                case"2":
+                case "2":
                     ordenar = "sim";
                     controller.listarCartas(ordenar);
                     break;
-                case"0":
+                case "0":
                     sair = 0;
                     break;
                 default:
                     System.out.println("\nOpção inválida! Digite novamente: ");
                     break;
             }
-        }while(sair == 1);
+        } while (sair == 1);
     }
 }

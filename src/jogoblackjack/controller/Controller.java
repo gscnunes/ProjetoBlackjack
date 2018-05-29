@@ -1,9 +1,6 @@
 package jogoblackjack.controller;
 
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
 import java.util.Scanner;
-
 import jogoblackjack.model.*;
 import jogoblackjack.util.*;
 
@@ -31,6 +28,7 @@ public class Controller {
         jogadores = controllerArquivo.reader();
         jogadoresDaPartida = new LinkedList();
         cartasRestantes = new Carta[52];
+        ganhou = true;
     }
 
     /**
@@ -39,6 +37,8 @@ public class Controller {
      * nova carta
      */
     public void iniciarPartida() {
+
+        controllerArquivo.deletar();
 
         if (jogadores.isEmpty()) {
             System.out.println("\nNão há jogadores cadastrados!");
@@ -57,98 +57,9 @@ public class Controller {
             croupier = partida.getCroupier();
             addJogadorNaPartida(jogadores);
             pegarCarta();
-
-            Iterator cursor = jogadores.iterator();
-            Jogador jogador;
-
-            while (cursor.hasNext()) {
-                jogador = (Jogador) cursor.next();
-                System.out.println("\n\nTESTE ARQUIVO: " + jogador + " " + jogador.getPontTotal());
-                controllerArquivo.writerUpdate(jogador);
-            }
-
-            //controllerArquivo.writerUpdate(jogadores);
-            System.out.println("\nUm arquivo de texto foi gerado mostrando o placar!");
+            placar();
+            zerarValores();
         }
-        zerarValores();
-
-    }
-
-    /**
-     *
-     * @return jogadores - lista com todos os jogadores
-     */
-    public Ilist getJogadores() {
-        return jogadores;
-    }
-
-    /**
-     * Método para mostrar as cartas que sobrou no baralho após a finalização da
-     * partida, mostra também as cartas de forma ordenada
-     *
-     * @param ordenar
-     */
-    public void listarCartas(String ordenar) {
-
-        Carta aux;
-        int aux2;
-        int temp = 0;
-        int[] arrayId = new int[52];
-        int i = 0;
-
-        while (!partida.getMonteCartas().isEmpty()) {
-            aux = (Carta) partida.getMonteCartas().pop();
-            cartasRestantes[i] = aux;
-            i++;
-            temp = i;
-        }
-
-        if ("nao".equals(ordenar)) {
-            System.out.println("\nCartas restantes no monte:");
-            for (Carta carta : cartasRestantes) {
-                if (carta == null) {
-                    break;
-                }
-                System.out.println("-----");
-                System.out.println("\n" + carta);
-
-            }
-        } else {
-            i = 0;
-
-            for (Carta carta : cartasRestantes) {
-                if (carta == null) {
-                    break;
-                }
-                arrayId[i] = carta.getIdentificador();
-                i++;
-            }
-
-            for (i = 1; i < arrayId.length; i++) {
-                int j = i;
-
-                while (j > 0 && arrayId[j] < arrayId[j - 1]) {
-                    aux2 = arrayId[j];
-                    arrayId[j] = arrayId[j - 1];
-                    arrayId[j - 1] = aux2;
-                    j--;
-                }
-            }
-            System.out.println("Cartas restantes no monte ordenadas: \n");
-
-            for (int id : arrayId) {
-                for (Carta carta : cartasRestantes) {
-                    if (carta == null) {
-                        break;
-                    }
-                    if (id == carta.getIdentificador()) {
-                        System.out.println("-----");
-                        System.out.println(carta);
-                    }
-                }
-            }
-        }
-
     }
 
     /**
@@ -202,6 +113,60 @@ public class Controller {
     }
 
     /**
+     * Método para o jogador pegar novas cartas. Caso ele queira uma nova carta
+     * ela é adicionada na sua mão.
+     */
+    public void pegarCarta() {
+        String resposta;
+        int naoPegar = 0;
+        do {
+            Iterator iterador = jogadoresDaPartida.iterator();
+
+            while (iterador.hasNext()) {
+                Jogador user = (Jogador) iterador.next();
+
+                System.out.print("\nJogador " + "'" + user + "'");
+                System.out.println(" deseja pegar carta? [1] - SIM [2] - NÃO");
+                resposta = scan.next();
+
+                while ("1".equals(resposta)) {
+                    user.pegarCarta(darCarta());
+                    mostrarMao(user);
+                    if (verificarEstourou(user)) {
+                        System.out.println("\nJogador " + "'" + user + "'" + " estourou com " + user.cartasNaMao() + " pontos!");
+
+                        LinkedList novasCartas = new LinkedList();
+                        MaoDeCarta novaMao = new MaoDeCarta();
+
+                        user.setCartas(novasCartas);
+                        user.setMaodecarta(novaMao);
+                        break;
+                    } else if (verificar21(user)) {
+                        System.out.println("\nJogador " + "'" + user + "'" + " fez 21!");
+                        user.setJogosVencidos(user.getJogosVencidos() + 1);
+                        user.setPontTotal(user.getPontTotal() + 10);
+
+                        System.out.println("\n\nTESTE: " + user.getJogosVencidos() + " " + user.getPontTotal() + "\n\n");
+
+                        break;
+                    }
+                    System.out.print("\nJogador " + "'" + user + "'");
+                    System.out.println(" deseja pegar carta? [1] - SIM [2] - NÃO");
+                    resposta = scan.next();
+                }
+                naoPegar++;
+            }
+            if (naoPegar == partida.getNumDeJogadores()) {
+                ganhou = false;
+            }
+        } while (getGanhou());
+
+        limiteCroupier();
+        cartasDoCroupier();
+        verificarQuemGanhou();
+    }
+
+    /**
      * Distribui as cartas iniciais para todos os jogadores da partida e também
      * para o croupier.
      */
@@ -217,13 +182,15 @@ public class Controller {
             user.pegarCarta(darCarta());
             mostrarMao(user);
         }
-        System.out.println("\n\nCartas do Croupier:");
+        System.out.println("\nCartas do Croupier:\n");
         carta = (Carta) croupier.pegarCarta(darCarta());
 
-        System.out.println("");
         System.out.println(carta);
+        System.out.println("-----");
+
         croupier.pegarCarta(darCarta());
         System.out.println("**Carta desconhecida**");
+        System.out.println("-----");
         System.out.println("");
         System.out.println("");
     }
@@ -248,15 +215,26 @@ public class Controller {
      */
     public void cartasDoCroupier() {
         Iterator iterador = croupier.getCartas().iterator();
-        System.out.println("Cartas do croupier:");
+        System.out.println("Cartas do croupier:\n");
 
         System.out.println("");
         while (iterador.hasNext()) {
             Carta carta = (Carta) iterador.next();
             System.out.println(carta);
+            System.out.println("-----");
         }
         System.out.println("");
         System.out.println("");
+    }
+
+    /**
+     * Método para verificar se o jogador estourou.
+     *
+     * @param user - jogador que deseja verificar
+     * @return true caso o jogador tenha estourado
+     */
+    public boolean verificarEstourou(Jogador user) {
+        return user.cartasNaMao() > 21;
     }
 
     /**
@@ -270,9 +248,9 @@ public class Controller {
     }
 
     /**
-     * Método que verificar qual jogador ganhou após a finalização da partida.
-     * Salva o jogador que fez mais pontos comparando com todos os outros, logo
-     * após compara com o croupier.
+     * Método que verificar qual jogador ganhou/empatou após a finalização da
+     * partida. Salva o jogador que fez mais pontos comparando com todos os
+     * outros, logo após compara com o croupier.
      *
      */
     public void verificarQuemGanhou() {
@@ -289,14 +267,13 @@ public class Controller {
             }
         }
 
-        if (rodarCroupier(jogadorMaior)) { //O CROUPIER GANHA SE A MÃO FOR MAIOR QUE A DA MAIOR MAO
+        if (rodarCroupier(jogadorMaior)) {
             System.out.println("O croupier ganhou com a maior mão, valendo " + croupier.cartasNaMao() + " pontos!");
-            //return;
-        } else if (!rodarCroupier(jogadorMaior)) { //GANHA O JOGADOR COM A MAIOR MAO
+        } else if (!rodarCroupier(jogadorMaior) && jogadorMaior.cartasNaMao() != 0) {
             System.out.println("Jogador " + "'" + jogadorMaior + "'" + " ganhou com a maior mão, valendo " + jogadorMaior.cartasNaMao() + " pontos!");
             jogadorMaior.setJogosVencidos(jogadorMaior.getJogosVencidos() + 1);
             jogadorMaior.setPontTotal(jogadorMaior.getPontTotal() + 10);
-        } else { //JOGADOR EMPATA COM O CROUPIER
+        } else {
             while (iterador.hasNext()) {
                 user = (Jogador) iterador.next();
 
@@ -307,29 +284,7 @@ public class Controller {
                     break;
                 }
             }
-
         }
-
-//        Iterator iterador = jogadoresDaPartida.iterator();
-//        Jogador jogadorMaior = (Jogador) iterador.next();
-//        Jogador user;
-//
-//        while (iterador.hasNext()) { //GANHA O JOGADOR COM A MAIOR MÃO (SEM ESTOURAR)
-//            user = (Jogador) iterador.next();
-//
-//            if (user.cartasNaMao() < 21 && user.cartasNaMao() > jogadorMaior.cartasNaMao()) {
-//                jogadorMaior = user;
-//            }
-//        }
-//        if (rodarCroupier(jogadorMaior)) { //O CROUPIER GANHA SE A MÃO FOR MAIOR QUE A DA MAIOR MAO
-//            return;
-//        }
-//        if(verificar21())
-//        
-//        System.out.println("Jogador " + jogadorMaior + " ganhou!");
-//
-//        jogadorMaior.setJogosVencidos(jogadorMaior.getJogosVencidos() + 1);
-//        jogadorMaior.setPontTotal(jogadorMaior.getPontTotal() + 10);
     }
 
     /**
@@ -340,12 +295,105 @@ public class Controller {
      * @return
      */
     public boolean rodarCroupier(Jogador jogadorMaior) {
-        if (croupier.cartasNaMao() > jogadorMaior.cartasNaMao()) {
-            if (!verificarEstourou(croupier)) {
-                return true;
-            }
+        if (croupier.cartasNaMao() > jogadorMaior.cartasNaMao() && croupier.cartasNaMao() < 21) {
+            return true;
         }
         return false;
+    }
+
+    public void placar() {
+
+        Iterator cursor = jogadores.iterator();
+        int i = 0;
+        Jogador[] placar = new Jogador[jogadores.size()];
+
+        while (cursor.hasNext()) {
+            Jogador jogador = (Jogador) cursor.next();
+            placar[i] = jogador;
+            i++;
+        }
+
+        for (i = 1; i < placar.length; i++) {
+            int j = i;
+
+            while (j > 0 && placar[j].getPontTotal() > placar[j - 1].getPontTotal()) {
+                Jogador aux2 = placar[j];
+                placar[j] = placar[j - 1];
+                placar[j - 1] = aux2;
+                j--;
+            }
+        }
+
+        for (Jogador aux : placar) {
+            controllerArquivo.writerUpdate(aux);
+        }
+        System.out.println("\nUm arquivo de texto foi gerado mostrando o placar!");
+    }
+
+    /**
+     * Método para mostrar as cartas que sobrou no baralho após a finalização da
+     * partida, mostra também as cartas de forma ordenada
+     *
+     * @param ordenar
+     */
+    public void listarCartas(String ordenar) {
+
+        Carta aux;
+        int aux2;
+        int[] arrayId = new int[52];
+        int i = 0;
+
+        while (!partida.getMonteCartas().isEmpty()) {
+            aux = (Carta) partida.getMonteCartas().pop();
+            cartasRestantes[i] = aux;
+            i++;
+        }
+
+        if ("nao".equals(ordenar)) {
+            System.out.println("\nCartas restantes no monte:");
+            for (Carta carta : cartasRestantes) {
+                if (carta == null) {
+                    break;
+                }
+                System.out.println("-----");
+                System.out.println("\n" + carta);
+
+            }
+        } else {
+            i = 0;
+
+            for (Carta carta : cartasRestantes) {
+                if (carta == null) {
+                    break;
+                }
+                arrayId[i] = carta.getIdentificador();
+                i++;
+            }
+
+            for (i = 1; i < arrayId.length; i++) {
+                int j = i;
+
+                while (j > 0 && arrayId[j] < arrayId[j - 1]) {
+                    aux2 = arrayId[j];
+                    arrayId[j] = arrayId[j - 1];
+                    arrayId[j - 1] = aux2;
+                    j--;
+                }
+            }
+            System.out.println("Cartas restantes no monte ordenadas: \n");
+
+            for (int id : arrayId) {
+                for (Carta carta : cartasRestantes) {
+                    if (carta == null) {
+                        break;
+                    }
+                    if (id == carta.getIdentificador()) {
+                        System.out.println("-----");
+                        System.out.println("\n" + carta);
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -357,77 +405,14 @@ public class Controller {
 
         Iterator cursor = jogador.getCartas().iterator();
 
-        System.out.println("\nCartas do user: " + jogador);
-        System.out.println("");
+        System.out.println("\nCartas do user: " + jogador + "\n");
 
         while (cursor.hasNext()) {
             Carta carta = (Carta) cursor.next();
             System.out.println(carta);
+            System.out.println("-----");
         }
         System.out.println("");
-    }
-
-    /**
-     * Método para saber se todos os jogadores da partida jogaram.
-     *
-     * @return
-     */
-    public boolean getGanhou() {
-        return ganhou;
-    }
-
-    /**
-     * Método para o jogador pegar novas cartas. Caso ele queira uma nova carta
-     * ela é adicionada na sua mão.
-     */
-    public void pegarCarta() {
-        String resposta;
-        int naoPegar = 0;
-        do {
-            Iterator iterador = jogadoresDaPartida.iterator();
-            //meto1do pedir nova carta
-            while (iterador.hasNext()) {
-                Jogador user = (Jogador) iterador.next();
-
-                System.out.print("\nJogador " + "'" + user + "'");
-                System.out.println(" deseja pegar carta? [1] - SIM [2] - NÃO");
-                resposta = scan.next();
-
-                while ("1".equals(resposta)) {
-                    user.pegarCarta(darCarta());
-                    mostrarMao(user);
-                    if (verificarEstourou(user)) {
-                        System.out.println("\nJogador " + "'" + user + "'" + " estourou com " + user.cartasNaMao() + " pontos!");
-
-                        LinkedList novasCartas = new LinkedList();
-                        MaoDeCarta novaMao = new MaoDeCarta();
-
-                        user.setCartas(novasCartas);
-                        user.setMaodecarta(novaMao);
-                        break;
-                    } else if (verificar21(user)) {
-                        System.out.println("\nJogador " + "'" + user + "'" + " fez 21!");
-//                        user.setJogosVencidos(user.getJogosVencidos() + 1);
-//                        user.setPontTotal(user.getPontTotal() + 10);
-
-                        System.out.println("\n\nTESTE: " + user.getJogosVencidos() + " " + user.getPontTotal() + "\n\n");
-
-                        break;
-                    }
-                    System.out.print("\nJogador " + "'" + user + "'");
-                    System.out.println(" deseja pegar carta? [1] - SIM [2] - NÃO");
-                    resposta = scan.next();
-                }
-                naoPegar++;
-            }
-            if (naoPegar == partida.getNumDeJogadores()) {
-                ganhou = false;
-            }
-        } while (getGanhou());
-
-        limiteCroupier();
-        cartasDoCroupier();
-        verificarQuemGanhou();
     }
 
     /**
@@ -452,21 +437,28 @@ public class Controller {
     }
 
     /**
-     * Método para verificar se o jogador estourou.
-     *
-     * @param user - jogador que deseja verificar
-     * @return true caso o jogador tenha estourado
-     */
-    public boolean verificarEstourou(Jogador user) {
-        return user.cartasNaMao() > 21;
-    }
-
-    /**
      * Método para pegar uma nova carta.
      *
      * @return
      */
     public Carta darCarta() {
         return (Carta) partida.getMonteCartas().pop();
+    }
+
+    /**
+     * Método para saber se todos os jogadores da partida jogaram.
+     *
+     * @return
+     */
+    public boolean getGanhou() {
+        return ganhou;
+    }
+
+    /**
+     *
+     * @return jogadores - lista com todos os jogadores
+     */
+    public Ilist getJogadores() {
+        return jogadores;
     }
 }

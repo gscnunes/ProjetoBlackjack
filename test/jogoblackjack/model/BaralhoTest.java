@@ -18,7 +18,7 @@ public class BaralhoTest {
         baralho = new Baralho();
         test = baralho.addCartas();
         carta1 = new Carta("♦", "AS", 52);
-     }
+    }
 
     @Test
     public void criarBaralho() {

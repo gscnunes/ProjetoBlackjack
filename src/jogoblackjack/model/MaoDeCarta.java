@@ -69,6 +69,16 @@ public class MaoDeCarta {
                 if (maodecarta.size() == 2) {
                     return 11;
                 }
+                if (pontos >= 10) {
+                    return 1;
+                } else {
+                    return 11;
+                }
+            }
+            if (pontos >= 10) {
+                return 1;   
+            } else {
+                return 11;
             }
         }
         return 1;
